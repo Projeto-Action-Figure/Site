@@ -2,7 +2,7 @@
     --corPrimary: #FFF;
     --corSecondary: #FFF;
     --corTertiary: #FFF;
-    --corAsjunct: #FFF;
+    --corAdjunct: #FFF;
     --corBackground: #0d2b38;
     --corBranco: #FFF;
     --corPreto: #000;
@@ -10,11 +10,17 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
     background-color: var(--corBackground);
     font-family: Montserrat;
+}
+
+nav {
+    padding: 15px;
 }
 
 h1 {
