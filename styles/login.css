@@ -1,0 +1,55 @@
+.login-page { min-height: 100vh; background: #060b15; }
+.login-topbar { min-height: 75px; padding-inline: 30px; }
+.login-topbar .brand { gap: 31px; }
+.login-topbar .cn-logo { width: 72px; }
+.login-topbar .brand-name { font-size: 26px; }
+.login-topbar .signup-button { min-width: 136px; min-height: 31px; }
+.login-main { width: min(calc(100% - 48px), 1440px); margin: 24px auto 34px; padding: 0; }
+.back-link { display: inline-flex; align-items: center; gap: 11px; min-height: 36px; margin-bottom: 19px; color: #f6f7fb; font-size: 18px; font-weight: 500; }
+.back-link img { width: 17px; height: 17px; object-fit: contain; }
+.login-card { display: grid; grid-template-columns: minmax(0, 2.6fr) minmax(320px, 1fr); min-height: 640px; overflow: hidden; border: 1px solid #263a60; border-radius: 14px; background: #111a2c; }
+.login-content { padding: 36px 48px 30px; }
+.login-content h1 { margin: 0; font-size: 26px; font-weight: 500; line-height: 1.25; letter-spacing: -.45px; }
+.login-intro { margin: 8px 0 0; color: #98a1b0; font-size: 15px; font-weight: 300; }
+.login-form { margin-top: 56px; }
+.form-field + .form-field { margin-top: 22px; }
+.form-field label { display: block; margin-bottom: 8px; color: #c8ced9; font-size: 15px; font-weight: 400; text-transform: uppercase; }
+.input-wrap { display: flex; align-items: center; height: 45px; padding: 0 13px; border: 1px solid #2b426d; border-radius: 7px; background: #050a13; transition: border-color .2s, box-shadow .2s; }
+.input-wrap:focus-within { border-color: var(--yellow); box-shadow: 0 0 0 3px rgb(241 243 49 / .2); }
+.input-wrap img { flex: 0 0 auto; width: 19px; height: 19px; margin-right: 20px; object-fit: contain; }
+.input-wrap input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text); font: inherit; font-size: 15px; }
+.input-wrap input::placeholder { color: #b7bdc9; opacity: 1; }
+.password-help { display: flex; justify-content: flex-end; margin: 16px 0 0; font-size: 14px; }
+.password-help a { color: #00a7ff; }
+.password-help a:hover, .password-help a:focus-visible { color: #62c8ff; text-decoration: underline; }
+.submit-button { width: 100%; height: 53px; margin-top: 47px; border: 0; border-radius: 7px; background: var(--yellow); color: #050505; cursor: pointer; font: 600 12px/1 "Poppins", Arial, sans-serif; text-transform: uppercase; transition: transform .2s, box-shadow .2s, background .2s; }
+.submit-button:hover { background: #ffff4d; transform: translateY(-2px); box-shadow: 0 5px 16px rgb(0 0 0 / .28); }
+.submit-button:focus-visible, .back-link:focus-visible, .signup-prompt a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.signup-prompt { margin: 16px 0 0; color: #b7bdc9; text-align: center; font-size: 15px; }
+.signup-prompt a { color: var(--text); font-weight: 600; }
+.signup-prompt a:hover { color: var(--yellow); }
+.login-art { min-height: 100%; background: #04284b url("../images/logos/arcade-hero-mobile.png") center / cover no-repeat; }
+
+@media (max-width: 720px) {
+    .login-topbar { min-height: 58px; padding-inline: 14px; }
+    .login-topbar .brand { gap: 11px; }
+    .login-topbar .cn-logo { width: 40px; }
+    .login-topbar .brand-name { font-size: 16px; }
+    .login-topbar .signup-button { min-width: 92px; min-height: 30px; }
+    .login-main { width: min(calc(100% - 32px), 540px); margin-top: 16px; }
+    .login-card { grid-template-columns: 1fr; }
+    .login-content { padding: 32px 26px 28px; }
+    .login-form { margin-top: 38px; }
+    .login-art { min-height: 200px; background-position: center 42%; }
+}
+
+@media (max-width: 410px) {
+    .login-main { width: calc(100% - 24px); }
+    .back-link { margin-bottom: 12px; font-size: 16px; }
+    .login-content { padding: 28px 20px 24px; }
+    .input-wrap img { margin-right: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .input-wrap, .submit-button { transition: none; }
+}

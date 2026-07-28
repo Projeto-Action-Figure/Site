@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre na sua conta TCG Cartoon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../images/logos/cartoon-network-logo.png">
+    <link rel="stylesheet" href="../styles/style.css?v=3">
+    <link rel="stylesheet" href="../styles/login.css?v=2">
+    <title>Entrar | TCG Cartoon</title>
+</head>
+<body class="login-page">
+    <a class="skip-link" href="#conteudo">Pular para o formulário de login</a>
+
+    <header class="topbar login-topbar">
+        <a class="brand" href="../index.html" aria-label="TCG Cartoon - início">
+            <img class="cn-logo" src="../images/logos/cartoon-network-logo.png" alt="Cartoon Network">
+            <span class="brand-name">TCG CARTOON</span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a class="signup-button" href="#cadastro">Cadastre-se</a>
+        </nav>
+    </header>
+
+    <main class="login-main" id="conteudo">
+        <a class="back-link" href="../index.html">
+            <img src="../images/icons/chevron-left.png" alt="">
+            Voltar
+        </a>
+
+        <section class="login-card" aria-labelledby="login-title">
+            <div class="login-content">
+                <h1 id="login-title">Entrar</h1>
+                <p class="login-intro">Acesse sua conta para jogar</p>
+
+                <form class="login-form" action="#" method="post">
+                    <div class="form-field">
+                        <label for="email">E-mail</label>
+                        <div class="input-wrap">
+                            <img src="../images/icons/email.png" alt="">
+                            <input id="email" name="email" type="email" autocomplete="email" placeholder="nome@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="senha">Senha</label>
+                        <div class="input-wrap">
+                            <img src="../images/icons/lock.png" alt="">
+                            <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <p class="password-help"><a href="#recuperar-senha">Esqueci minha senha</a></p>
+                    <button class="submit-button" type="submit">Entrar</button>
+                </form>
+
+                <p class="signup-prompt" id="cadastro">Não tem conta? <a href="#cadastro">Cadastre-se</a></p>
+            </div>
+            <div class="login-art" role="img" aria-label="Personagens do Cartoon Network em uma cena Arcade"></div>
+        </section>
+    </main>
+</body>
+</html>
