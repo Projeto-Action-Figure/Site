@@ -1,0 +1,448 @@
+.pagina-loja main {
+    display: grid;
+    min-height: calc(100vh - 74px);
+    padding: 0;
+    grid-template-rows: 1fr auto;
+}
+
+.cabecalho-loja {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+.cabecalho-loja .saldo-moedas {
+    justify-self: end;
+}
+
+.reestoque-loja {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.reestoque-loja img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.reestoque-loja strong {
+    min-width: 44px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.conteudo-loja {
+    overflow: auto;
+    padding: 18px 24px 36px;
+}
+
+.conteudo-loja h1 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(25px, 3vw, 29px);
+    font-weight: 500;
+    text-align: center;
+}
+
+.estado-loja,
+.mensagem-loja {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.grade-loja {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 58px min(10vw, 104px);
+    width: min(100%, 944px);
+    margin: 38px auto 0;
+}
+
+.secao-loja {
+    min-width: 0;
+}
+
+.secao-loja h2 {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.secao-loja.destaque h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.lista-produtos {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lista-recursos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.produto-loja {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    min-height: 196px;
+    padding: 18px;
+    border: 2px solid #263a60;
+    border-radius: 8px;
+    background: #10192b;
+}
+
+.lista-recursos .produto-loja {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    min-height: 196px;
+    padding: 16px 6px 12px;
+    text-align: center;
+}
+
+.visual-pacote {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 5px;
+    width: 112px;
+    height: 110px;
+    margin: auto;
+    justify-items: center;
+}
+
+.visual-pacote img {
+    width: 100%;
+    height: 78px;
+    object-fit: contain;
+}
+
+.quantidade-pacote {
+    min-width: 64px;
+    padding: 3px 6px;
+    border: 1px solid #506383;
+    border-radius: 4px;
+    background: #10192b;
+    color: var(--text);
+    font-size: 12px;
+    text-align: center;
+}
+
+.visual-recurso {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    place-items: center;
+}
+
+.visual-recurso img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.informacoes-produto {
+    min-width: 0;
+}
+
+.produto-cabecalho,
+.produto-preco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.produto-cabecalho {
+    min-height: 28px;
+}
+
+.produto-quantidade {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.produto-nome {
+    overflow: hidden;
+    margin: 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.produto-preco {
+    margin: 14px 0;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.preco-moeda {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.preco-moeda img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.separador-preco {
+    color: var(--text);
+}
+
+.controles-quantidade {
+    display: grid;
+    grid-template-columns: 36px minmax(42px, 1fr) 36px;
+    align-items: center;
+    min-height: 38px;
+    margin-bottom: 10px;
+    border: 1px solid #506383;
+    border-radius: 6px;
+}
+
+.botao-quantidade {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font: 500 21px/1 "Poppins", Arial, sans-serif;
+}
+
+.botao-quantidade:hover:not(:disabled) {
+    background: #1a2740;
+}
+
+.botao-quantidade:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.valor-quantidade {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.acoes-produto {
+    display: grid;
+    gap: 8px;
+}
+
+.botao-compra {
+    min-height: 32px;
+    padding: 6px 10px;
+    border: 2px solid var(--yellow);
+    border-radius: 7px;
+    background: var(--yellow);
+    color: #050505;
+    cursor: pointer;
+    font: 500 12px/1.2 "Poppins", Arial, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.botao-compra.secundario {
+    border-color: #e2e5ed;
+    background: transparent;
+    color: var(--text);
+}
+
+.botao-compra:hover {
+    filter: brightness(1.08);
+}
+
+.lista-recursos .produto-cabecalho,
+.lista-recursos .produto-preco {
+    justify-content: center;
+}
+
+.lista-recursos .produto-nome {
+    display: none;
+}
+
+.lista-recursos .produto-preco {
+    margin: 0 0 10px;
+}
+
+.lista-recursos .controles-quantidade {
+    grid-template-columns: 30px minmax(32px, 1fr) 30px;
+    min-height: 32px;
+}
+
+.lista-recursos .botao-quantidade {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+}
+
+.lista-recursos .acoes-produto {
+    grid-template-columns: 1fr;
+}
+
+.navegacao-loja .item-navegacao {
+    text-decoration: none;
+}
+
+.navegacao-loja .item-navegacao.ativo {
+    background: var(--yellow);
+    color: #050505;
+}
+
+.navegacao-loja .item-navegacao.ativo small {
+    color: #35350c;
+}
+
+.navegacao-loja .item-navegacao.ativo img {
+    filter: brightness(0);
+}
+
+@media (max-width: 820px) {
+    .grade-loja {
+        gap: 36px;
+    }
+
+    .lista-recursos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .produto-loja {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .produto-loja:not(.lista-recursos .produto-loja) {
+        text-align: center;
+    }
+
+    .produto-cabecalho,
+    .produto-preco {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 620px) {
+    .pagina-loja main {
+        min-height: calc(100vh - 64px);
+    }
+
+    .cabecalho-loja {
+        grid-template-columns: 1fr auto;
+    }
+
+    .reestoque-loja {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+    }
+
+    .conteudo-loja {
+        padding: 24px 16px 24px;
+    }
+
+    .grade-loja {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-top: 28px;
+    }
+
+    .secao-loja h2 {
+        text-align: center;
+    }
+
+    .produto-loja {
+        grid-template-columns: 140px minmax(0, 1fr);
+        min-height: 178px;
+        gap: 10px;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .produto-loja:not(.lista-recursos .produto-loja) {
+        text-align: left;
+    }
+
+    .visual-pacote {
+        width: 128px;
+        transform: scale(0.8);
+    }
+
+    .produto-cabecalho,
+    .produto-preco {
+        justify-content: space-between;
+    }
+
+    .produto-nome {
+        font-size: 16px;
+    }
+
+    .lista-recursos {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .lista-recursos .produto-loja {
+        grid-template-columns: 1fr;
+        min-height: 178px;
+        padding: 12px 5px;
+        text-align: center;
+    }
+
+    .lista-recursos .produto-cabecalho,
+    .lista-recursos .produto-preco {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 390px) {
+    .produto-loja {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .produto-loja:not(.lista-recursos .produto-loja) {
+        text-align: center;
+    }
+
+    .produto-cabecalho,
+    .produto-preco {
+        justify-content: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .botao-compra {
+        transition: none;
+    }
+}

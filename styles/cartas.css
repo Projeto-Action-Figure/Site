@@ -6,9 +6,6 @@
 }
 
 .voltar-home {
-    position: absolute;
-    top: 16px;
-    left: 24px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -33,14 +30,18 @@
 }
 
 .conteudo-cartas {
-    position: relative;
     overflow: auto;
     padding: 18px 24px 28px;
 }
 
 .cabecalho-colecao {
-    padding-top: 48px;
+    display: grid;
+    gap: 4px;
     text-align: center;
+}
+
+.cabecalho-colecao .voltar-home {
+    justify-self: start;
 }
 
 .cabecalho-colecao h1,
@@ -235,13 +236,20 @@
     white-space: nowrap;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1060px) {
     .grade-deck {
-        grid-template-columns: repeat(4, minmax(0, 98px));
+        grid-template-columns: repeat(6, minmax(0, 98px));
     }
 
     .grade-colecao {
         grid-template-columns: repeat(6, minmax(0, 98px));
+    }
+}
+
+@media (max-width: 720px) {
+    .grade-deck,
+    .grade-colecao {
+        grid-template-columns: repeat(4, minmax(0, 98px));
     }
 }
 
@@ -255,8 +263,6 @@
     }
 
     .voltar-home {
-        top: 20px;
-        left: 12px;
         height: 44px;
     }
 
