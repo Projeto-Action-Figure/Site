@@ -98,6 +98,8 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 .login-button,
@@ -113,13 +115,14 @@ a:hover {
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0;
+    white-space: nowrap;
     text-transform: uppercase;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .login-button {
-    min-width: clamp(108px, 6.4vw, 128px);
     gap: 8px;
+    padding-inline: clamp(10px, 1.8vw, 18px);
     border: 1px solid #ffffff;
 }
 
@@ -130,7 +133,7 @@ a:hover {
 }
 
 .signup-button {
-    min-width: clamp(108px, 6.4vw, 128px);
+    padding-inline: clamp(10px, 1.8vw, 18px);
     background: var(--yellow);
     color: #050505;
 }
@@ -162,7 +165,6 @@ a:hover {
     justify-content: flex-end;
     padding-bottom: max(5px, calc(5.2vw - 24px));
     text-align: center;
-    transform: translateY(30px);
 }
 
 .hero h1 {
@@ -360,14 +362,34 @@ main {
     }
 
     .barra-superior nav {
+        flex: 1;
+        justify-content: flex-end;
         gap: 6px;
     }
 
     .login-button,
     .signup-button {
-        min-width: 92px;
+        flex: 0 0 auto;
+        width: auto;
         min-height: 44px;
+        padding-inline: 8px;
         font-size: 10px;
+    }
+
+    .hero {
+        aspect-ratio: 3 / 1;
+        min-height: 0;
+        background-size: cover;
+    }
+
+    .hero-content {
+        padding-bottom: 5px;
+    }
+
+    .play-button {
+        width: auto;
+        min-width: 108px;
+        padding-inline: 20px;
     }
 
     .features {
@@ -389,20 +411,35 @@ main {
 }
 
 @media (max-width: 410px) {
+    .brand {
+        gap: 7px;
+        min-width: 0;
+    }
+
     .brand-name {
-        display: none;
+        display: block;
+        font-size: clamp(11px, 3.3vw, 14px);
+        letter-spacing: -0.6px;
+        white-space: nowrap;
     }
 
     .barra-superior {
-        padding-inline: 16px;
+        padding-inline: 12px;
     }
 
-    .login-button {
-        width: 74px;
+    .barra-superior nav {
+        gap: 4px;
     }
 
+    .login-button,
     .signup-button {
-        width: 84px;
+        width: auto;
+        padding-inline: 7px;
+    }
+
+    .login-button img {
+        width: 12px;
+        height: 12px;
     }
 
     .about {
