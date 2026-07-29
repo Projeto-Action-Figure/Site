@@ -1,12 +1,20 @@
 "use strict";
 
-function obterMensagemCampo(campo) {
+function obterMensagemCampo(campo, formulario) {
     if (campo.validity.valueMissing) {
         return "Preencha este campo.";
     }
 
     if (campo.type === "email" && campo.validity.typeMismatch) {
         return "Informe um endereço de e-mail válido.";
+    }
+
+    if (campo.validity.tooShort) {
+        return `Informe ao menos ${campo.minLength} caracteres.`;
+    }
+
+    if (campo.id === "confirmar-senha" && campo.value !== formulario.elements.senha.value) {
+        return "As senhas precisam ser iguais.";
     }
 
     return "";
@@ -19,12 +27,12 @@ function exibirErroCampo(campo, mensagem) {
     elementoErro.textContent = mensagem;
 }
 
-function validarFormularioLogin(formulario) {
+function validarFormulario(formulario) {
     const campos = formulario.querySelectorAll("input[required]");
     let primeiroCampoInvalido = null;
 
     campos.forEach((campo) => {
-        const mensagem = obterMensagemCampo(campo);
+        const mensagem = obterMensagemCampo(campo, formulario);
 
         exibirErroCampo(campo, mensagem);
 
@@ -36,34 +44,37 @@ function validarFormularioLogin(formulario) {
     return primeiroCampoInvalido;
 }
 
-function configurarFormularioLogin() {
-    const formulario = document.querySelector(".formulario-login");
-
-    if (!formulario) {
-        return;
-    }
-
-    const mensagemLogin = document.getElementById("mensagem-login");
+function configurarFormulario(formulario) {
+    const mensagemFormulario = formulario.querySelector(".mensagem-formulario");
+    const ehCadastro = formulario.classList.contains("formulario-cadastro");
 
     formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
 
-        const primeiroCampoInvalido = validarFormularioLogin(formulario);
+        const primeiroCampoInvalido = validarFormulario(formulario);
 
         if (primeiroCampoInvalido) {
-            mensagemLogin.textContent = "Revise os campos indicados antes de continuar.";
+            mensagemFormulario.textContent = "Revise os campos indicados antes de continuar.";
             primeiroCampoInvalido.focus();
             return;
         }
 
-        mensagemLogin.textContent = "Dados validados. O login ainda não está conectado a um servidor.";
+        mensagemFormulario.textContent = ehCadastro
+            ? "Dados validados. O cadastro ainda não está conectado a um servidor."
+            : "Dados validados. O login ainda não está conectado a um servidor.";
     });
 
     formulario.querySelectorAll("input[required]").forEach((campo) => {
         campo.addEventListener("input", () => {
-            exibirErroCampo(campo, obterMensagemCampo(campo));
+            exibirErroCampo(campo, obterMensagemCampo(campo, formulario));
         });
     });
 }
 
-document.addEventListener("DOMContentLoaded", configurarFormularioLogin);
+function configurarFormulariosAutenticacao() {
+    const formularios = document.querySelectorAll(".formulario-login, .formulario-cadastro");
+
+    formularios.forEach(configurarFormulario);
+}
+
+document.addEventListener("DOMContentLoaded", configurarFormulariosAutenticacao);
