@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Batalha de cartas do TCG Cartoon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../images/logos/cartoon-network-logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/batalha.css">
+    <script src="../scripts/batalha.js" defer></script>
+    <title>Batalha | TCG Cartoon</title>
+</head>
+<body class="pagina-batalha">
+    <a class="skip-link" href="#conteudo">Pular para a área de batalha</a>
+
+    <header class="cabecalho-batalha">
+        <a class="jogador-batalha" href="home.html" aria-label="Voltar para a home do jogo">
+            <img src="../images/icons/account-circle.png" alt="">
+            <span>Rival_03</span>
+        </a>
+        <div class="status-partida" aria-label="Status da partida">
+            <p class="vida-jogador"><img src="../images/icons/favorite-heart.png" alt=""><span id="vida-adversario">4</span><span class="sr-only"> pontos de vida do adversário</span></p>
+            <p class="cronometro"><img src="../images/icons/clock.png" alt=""><span id="cronometro">00:25</span><span class="sr-only"> restantes para o turno</span></p>
+        </div>
+    </header>
+
+    <main id="conteudo" tabindex="-1">
+        <section class="area-batalha" aria-labelledby="titulo-batalha">
+            <h1 class="sr-only" id="titulo-batalha">Batalha contra Rival_03</h1>
+            <button class="botao-desistir" id="botao-desistir" type="button">Desistir</button>
+
+            <section class="lado-campo lado-adversario" aria-label="Campo do adversário">
+                <ul class="cartas-campo" id="cartas-adversario" aria-label="Cartas do adversário"></ul>
+            </section>
+
+            <div class="indicador-turno" id="indicador-turno" aria-live="polite">
+                <span></span>
+                <strong>Seu turno</strong>
+                <span></span>
+            </div>
+
+            <section class="lado-campo lado-jogador" aria-label="Seu campo">
+                <ul class="cartas-campo" id="cartas-jogador" aria-label="Suas cartas no campo"></ul>
+            </section>
+            <p class="mensagem-batalha jogador" id="mensagem-batalha" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="zona-jogador" aria-labelledby="titulo-mao">
+            <h2 class="sr-only" id="titulo-mao">Sua mão</h2>
+            <p class="vida-jogador vida-propria"><img src="../images/icons/favorite-heart.png" alt=""><span id="vida-jogador">6</span><span class="sr-only"> seus pontos de vida</span></p>
+            <ul class="mao-jogador" id="mao-jogador" aria-label="Escolha uma carta para trocar"></ul>
+            <p class="energia-jogador"><span>Energia</span><strong id="energia-jogador">3/3</strong></p>
+
+            <div class="acoes-batalha" aria-label="Ações da batalha">
+                <button class="botao-acao secundario" id="botao-trocar" type="button">Trocar carta</button>
+                <button class="botao-acao primario" id="botao-atacar" type="button">Atacar</button>
+                <button class="botao-acao secundario" id="botao-passar" type="button">Passar turno</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

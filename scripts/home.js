@@ -32,16 +32,11 @@ function renderizarDeck() {
 
 function configurarInteracoes() {
     document.getElementById("botao-batalhar").addEventListener("click", () => {
-        exibirMensagem("As batalhas estarão disponíveis em breve.");
+        window.location.assign("batalha.html");
     });
 
     document.querySelectorAll(".item-navegacao").forEach((botao) => {
         botao.addEventListener("click", () => {
-            document.querySelectorAll(".item-navegacao").forEach((item) => {
-                item.classList.toggle("ativo", item === botao);
-                item.setAttribute("aria-pressed", String(item === botao));
-            });
-
             exibirMensagem(`A seção ${botao.dataset.secao} estará disponível em breve.`);
         });
     });

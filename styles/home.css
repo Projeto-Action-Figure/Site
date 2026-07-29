@@ -206,8 +206,7 @@
     border-right: 0;
 }
 
-.item-navegacao:hover,
-.item-navegacao[aria-pressed="true"] {
+.item-navegacao:hover {
     background: #151f34;
 }
 

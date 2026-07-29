@@ -1,0 +1,530 @@
+.pagina-batalha {
+    min-height: 100vh;
+    padding-top: 0;
+    background: #050a13;
+}
+
+.pagina-batalha main {
+    display: grid;
+    min-height: calc(100vh - 74px);
+    padding: 0;
+    grid-template-rows: minmax(438px, 1fr) auto;
+}
+
+.cabecalho-batalha {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 74px;
+    padding: 12px 28px;
+    border: 2px solid #263a60;
+    background: #080d17;
+}
+
+.jogador-batalha,
+.status-partida,
+.vida-jogador,
+.cronometro,
+.energia-jogador {
+    display: flex;
+    align-items: center;
+}
+
+.jogador-batalha {
+    gap: 18px;
+    min-height: 44px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.jogador-batalha:hover {
+    color: var(--yellow);
+    text-decoration: none;
+}
+
+.jogador-batalha img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.status-partida {
+    position: static;
+    gap: clamp(28px, 8vw, 340px);
+}
+
+.status-partida .vida-jogador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.vida-jogador,
+.cronometro {
+    gap: 10px;
+    margin: 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.vida-jogador img,
+.cronometro img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.vida-jogador img {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(99%) saturate(2905%) hue-rotate(344deg) brightness(106%) contrast(101%);
+}
+
+.area-batalha {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    min-height: 438px;
+    padding: 18px 32px 28px;
+    border-right: 2px solid #263a60;
+    border-bottom: 2px solid #263a60;
+    border-left: 2px solid #263a60;
+}
+
+.botao-desistir {
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    left: 28px;
+    width: 136px;
+    min-height: 28px;
+    border: 0;
+    border-radius: 7px;
+    background: #ff3743;
+    color: #050505;
+    cursor: pointer;
+    font: 600 12px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.lado-campo {
+    display: grid;
+    place-items: center;
+}
+
+.cartas-campo,
+.mao-jogador {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cartas-campo {
+    grid-template-columns: repeat(3, 98px);
+    gap: 48px;
+}
+
+.carta-campo,
+.carta-mao {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #263a60;
+    border-radius: 8px;
+    background: #10192b;
+}
+
+.carta-campo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 98px;
+    aspect-ratio: 0.72;
+    padding: 8px;
+}
+
+.carta-campo.ativa {
+    border-color: #263a60;
+}
+
+.carta-campo.ativa::before,
+.carta-mao::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    border: 1px solid rgb(255 255 255 / 4%);
+    pointer-events: none;
+}
+
+.carta-campo.esquerda {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.carta-campo.direita {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.carta-campo.centro {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.carta-campo.selecionada {
+    border-color: var(--yellow);
+}
+
+.botao-carta-campo {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+}
+
+.botao-carta-campo:disabled {
+    cursor: not-allowed;
+}
+
+.dados-carta {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2px;
+    color: var(--text);
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: left;
+}
+
+.dados-carta strong {
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dados-carta span {
+    color: #d2d6df;
+}
+
+.indicador-turno {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 34px;
+}
+
+.indicador-turno > span {
+    height: 2px;
+    background: #263a60;
+}
+
+.indicador-turno strong {
+    min-width: 224px;
+    min-height: 38px;
+    padding: 10px 20px;
+    border-radius: 22px;
+    background: var(--yellow);
+    color: #050505;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.indicador-turno.turno-adversario strong {
+    background: #263a60;
+    color: var(--text);
+}
+
+.zona-jogador {
+    position: relative;
+    min-height: 252px;
+    padding: 24px 32px 18px;
+    border-right: 2px solid #263a60;
+    border-bottom: 2px solid #263a60;
+    border-left: 2px solid #263a60;
+    background: #080d17;
+}
+
+.vida-propria {
+    position: absolute;
+    top: 23px;
+    right: 28px;
+}
+
+.mao-jogador {
+    grid-template-columns: repeat(4, 98px);
+    justify-content: center;
+    gap: 16px;
+}
+
+.carta-mao {
+    width: 98px;
+    aspect-ratio: 0.72;
+    padding: 8px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: "Poppins", Arial, sans-serif;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.carta-mao:hover,
+.carta-mao[aria-pressed="true"] {
+    border-color: var(--yellow);
+    transform: translateY(-4px);
+}
+
+.carta-mao:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.energia-jogador {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.energia-jogador strong {
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+.acoes-batalha {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: min(100%, 968px);
+    margin: 10px auto 0;
+}
+
+.botao-acao {
+    min-height: 46px;
+    border: 2px solid #263a60;
+    border-radius: 7px;
+    cursor: pointer;
+    font: 500 16px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.botao-acao.secundario {
+    background: transparent;
+    color: var(--text);
+}
+
+.botao-acao.primario {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    color: #050505;
+}
+
+.botao-acao:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 28%);
+}
+
+.botao-acao:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.mensagem-batalha {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    width: min(26vw, 290px);
+    margin: 0;
+    padding: 11px 14px;
+    border: 1px solid #263a60;
+    border-radius: 7px;
+    background: #111a2c;
+    color: #d9dc49;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.mensagem-batalha.jogador {
+    right: 32px;
+    border-color: #d9dc49;
+}
+
+.mensagem-batalha.adversario {
+    left: 32px;
+    color: #ffd3d6;
+    border-color: #ff5962;
+}
+
+.mensagem-batalha:empty {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .pagina-batalha main {
+        min-height: calc(100vh - 64px);
+        grid-template-rows: auto auto;
+    }
+
+    .cabecalho-batalha {
+        min-height: 64px;
+        padding: 10px 14px;
+    }
+
+    .jogador-batalha {
+        gap: 9px;
+        font-size: 15px;
+    }
+
+    .jogador-batalha img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .status-partida {
+        gap: 14px;
+    }
+
+    .vida-jogador,
+    .cronometro {
+        gap: 5px;
+        font-size: 14px;
+    }
+
+    .vida-jogador img,
+    .cronometro img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .area-batalha {
+        min-height: 376px;
+        padding: 16px 14px 20px;
+    }
+
+    .botao-desistir {
+        top: 10px;
+        left: 14px;
+        width: 100px;
+        min-height: 34px;
+        font-size: 10px;
+    }
+
+    .cartas-campo {
+        grid-template-columns: repeat(3, 70px);
+        gap: min(7vw, 34px);
+    }
+
+    .carta-campo {
+        width: 70px;
+        padding: 5px;
+    }
+
+    .dados-carta {
+        font-size: 8px;
+    }
+
+    .dados-carta strong {
+        font-size: 9px;
+    }
+
+    .indicador-turno {
+        gap: 10px;
+    }
+
+    .indicador-turno strong {
+        min-width: 134px;
+        min-height: 34px;
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .zona-jogador {
+        min-height: 230px;
+        padding: 18px 12px 14px;
+    }
+
+    .vida-propria {
+        top: 14px;
+        right: 14px;
+    }
+
+    .mao-jogador {
+        grid-template-columns: repeat(4, minmax(0, 70px));
+        gap: 8px;
+    }
+
+    .carta-mao {
+        width: 70px;
+        padding: 5px;
+    }
+
+    .energia-jogador {
+        top: 18px;
+        left: 14px;
+        font-size: 12px;
+    }
+
+    .acoes-batalha {
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .botao-acao {
+        min-height: 44px;
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .mensagem-batalha {
+        width: min(42vw, 190px);
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .mensagem-batalha.jogador {
+        right: 14px;
+    }
+
+    .mensagem-batalha.adversario {
+        left: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carta-mao,
+    .botao-acao {
+        transition: none;
+    }
+}
