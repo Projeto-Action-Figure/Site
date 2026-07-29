@@ -60,14 +60,12 @@ function configurarFormulario(formulario) {
             return;
         }
 
-        if (ehCadastro) {
-            mensagemFormulario.textContent = "Dados validados. O cadastro ainda não está conectado a um servidor.";
+        if (ehRedefinicaoSenha) {
+            mensagemFormulario.textContent = "Senha validada. O e-mail de confirmação ainda não está conectado a um servidor.";
             return;
         }
 
-        mensagemFormulario.textContent = ehRedefinicaoSenha
-            ? "Senha validada. O e-mail de confirmação ainda não está conectado a um servidor."
-            : "Dados validados. O login ainda não está conectado a um servidor.";
+        window.location.assign("home.html");
     });
 
     formulario.querySelectorAll("input[required]").forEach((campo) => {

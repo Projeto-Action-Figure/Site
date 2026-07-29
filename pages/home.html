@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página inicial do jogo TCG Cartoon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../images/logos/cartoon-network-logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <script src="../scripts/home.js" defer></script>
+    <title>Início do jogo | TCG Cartoon</title>
+</head>
+<body class="pagina-jogo">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo do jogo</a>
+
+    <header class="cabecalho-jogo">
+        <a class="perfil-jogador" href="../index.html" aria-label="Voltar para a página inicial">
+            <img src="../images/icons/account-circle.png" alt="">
+            <span>Meu nome</span>
+        </a>
+        <p class="saldo-moedas" aria-label="Moedas disponíveis: 0">
+            <img src="../images/icons/diamond-badge.png" alt="">
+            <span aria-hidden="true">0</span>
+        </p>
+    </header>
+
+    <main id="conteudo" tabindex="-1">
+        <section class="area-principal" aria-labelledby="titulo-boas-vindas">
+            <div class="boas-vindas">
+                <h1 id="titulo-boas-vindas">Bem-vindo de volta!</h1>
+                <p>Pronto para sua próxima batalha?</p>
+                <button class="botao-batalhar" id="botao-batalhar" type="button">Batalhar</button>
+                <p class="mensagem-jogo" id="mensagem-jogo" role="status" aria-live="polite"></p>
+            </div>
+
+            <section class="secao-deck" aria-labelledby="titulo-deck">
+                <h2 id="titulo-deck">Seu Deck</h2>
+                <p class="estado-deck" id="estado-deck" role="status" aria-live="polite">Carregando seu deck.</p>
+                <ul class="lista-deck" id="lista-deck" aria-label="Espaços do seu deck" hidden></ul>
+            </section>
+        </section>
+
+        <nav class="navegacao-jogo" aria-label="Seções do jogo">
+            <button class="item-navegacao ativo" type="button" data-secao="Cartas" aria-pressed="true">
+                <img src="../images/icons/playing-cards.png" alt="">
+                <span>Cartas</span>
+                <small>Veja sua coleção completa de cartas</small>
+            </button>
+            <button class="item-navegacao" type="button" data-secao="Loja" aria-pressed="false">
+                <img src="../images/icons/storefront.png" alt="">
+                <span>Loja</span>
+                <small>Compre pacotes de personagens</small>
+            </button>
+            <button class="item-navegacao" type="button" data-secao="Ranking" aria-pressed="false">
+                <img src="../images/icons/crossed-swords.png" alt="">
+                <span>Ranking</span>
+                <small>Acompanhe sua posição na temporada</small>
+            </button>
+        </nav>
+    </main>
+</body>
+</html>

@@ -1,0 +1,314 @@
+.pagina-jogo {
+    min-height: 100vh;
+    padding-top: 0;
+    background: #050a13;
+}
+
+.pagina-jogo main {
+    display: grid;
+    min-height: calc(100vh - 74px);
+    padding: 0;
+    grid-template-rows: 1fr auto;
+}
+
+.cabecalho-jogo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 74px;
+    padding: 12px 28px;
+    border: 2px solid #263a60;
+    background: #080d17;
+}
+
+.perfil-jogador,
+.saldo-moedas {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.perfil-jogador {
+    gap: 18px;
+    min-height: 44px;
+}
+
+.perfil-jogador:hover {
+    color: var(--yellow);
+    text-decoration: none;
+}
+
+.perfil-jogador img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.saldo-moedas {
+    gap: 8px;
+    min-height: 44px;
+    font-size: 16px;
+}
+
+.saldo-moedas img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.area-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 52px 24px 76px;
+}
+
+.boas-vindas {
+    text-align: center;
+}
+
+.boas-vindas h1,
+.secao-deck h2 {
+    margin: 0;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.boas-vindas h1 {
+    font-size: clamp(24px, 3vw, 28px);
+    line-height: 1.25;
+}
+
+.boas-vindas > p:not(.mensagem-jogo) {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.botao-batalhar {
+    width: min(100%, 256px);
+    min-height: 64px;
+    margin-top: 26px;
+    border: 0;
+    border-radius: 13px;
+    background: var(--yellow);
+    color: #050505;
+    cursor: pointer;
+    font: 500 20px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.botao-batalhar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 35%);
+    background: #ffff4d;
+}
+
+.mensagem-jogo {
+    min-height: 1.4em;
+    margin: 10px 0 0;
+    color: #d9dc49;
+    font-size: 14px;
+}
+
+.mensagem-jogo:empty {
+    min-height: 0;
+    margin: 0;
+}
+
+.secao-deck {
+    width: min(100%, 896px);
+    margin-top: 33px;
+}
+
+.secao-deck h2 {
+    font-size: 18px;
+    text-align: center;
+}
+
+.estado-deck {
+    min-height: 1.4em;
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.estado-deck.concluido {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.lista-deck {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 98px));
+    justify-content: center;
+    gap: 16px;
+    margin: 9px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.espaco-carta {
+    aspect-ratio: 0.72;
+    overflow: hidden;
+    border: 2px solid #263a60;
+    border-radius: 8px;
+    background: #10192b;
+}
+
+.espaco-carta::before {
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: "";
+    border: 1px solid rgb(255 255 255 / 3%);
+}
+
+.navegacao-jogo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    border-top: 2px solid #263a60;
+    background: #10192b;
+}
+
+.item-navegacao {
+    display: grid;
+    grid-template-columns: 32px minmax(68px, auto) minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    min-height: 68px;
+    padding: 10px 20px;
+    border: 0;
+    border-right: 2px solid #263a60;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-family: "Poppins", Arial, sans-serif;
+    text-align: left;
+}
+
+.item-navegacao:last-child {
+    border-right: 0;
+}
+
+.item-navegacao:hover,
+.item-navegacao[aria-pressed="true"] {
+    background: #151f34;
+}
+
+.item-navegacao img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.item-navegacao span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.item-navegacao small {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+    .area-principal {
+        justify-content: flex-start;
+        padding-top: 76px;
+    }
+
+    .secao-deck {
+        margin-top: 18px;
+    }
+
+    .lista-deck {
+        grid-template-columns: repeat(4, minmax(0, 98px));
+    }
+
+    .item-navegacao {
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .item-navegacao small {
+        display: none;
+    }
+}
+
+@media (max-width: 540px) {
+    .pagina-jogo main {
+        min-height: calc(100vh - 64px);
+    }
+
+    .cabecalho-jogo {
+        min-height: 64px;
+        padding: 10px 16px;
+    }
+
+    .perfil-jogador {
+        gap: 10px;
+        font-size: 16px;
+    }
+
+    .perfil-jogador img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .area-principal {
+        padding: 44px 16px 28px;
+    }
+
+    .botao-batalhar {
+        min-height: 56px;
+        border-radius: 9px;
+        font-size: 18px;
+    }
+
+    .secao-deck {
+        margin-top: 18px;
+    }
+
+    .lista-deck {
+        grid-template-columns: repeat(4, minmax(0, 76px));
+        gap: 12px;
+    }
+
+    .item-navegacao {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 3px;
+        min-height: 72px;
+        padding: 8px 4px;
+        text-align: center;
+    }
+
+    .item-navegacao span {
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .botao-batalhar {
+        transition: none;
+    }
+}
