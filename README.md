@@ -1,3 +1,9 @@
+# Integrantes
+Kauã Ribeiro Sales
+Laura Gonçalves de Carvalho
+Rafael Lopes Ribeiro
+Dominic Gorostiaga Vitorino
+
 # Site de acessibilidade
 
 # Pesquisa

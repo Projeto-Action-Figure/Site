@@ -8,14 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../images/logos/cartoon-network-logo.png">
-    <link rel="stylesheet" href="../styles/style.css?v=3">
-    <link rel="stylesheet" href="../styles/login.css?v=2">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <script src="../scripts/acessibilidade.js" defer></script>
     <title>Entrar | TCG Cartoon</title>
 </head>
-<body class="login-page">
+<body class="pagina-login">
     <a class="skip-link" href="#conteudo">Pular para o formulário de login</a>
 
-    <header class="topbar login-topbar">
+    <header class="barra-superior barra-login">
         <a class="brand" href="../index.html" aria-label="TCG Cartoon - início">
             <img class="cn-logo" src="../images/logos/cartoon-network-logo.png" alt="Cartoon Network">
             <span class="brand-name">TCG CARTOON</span>
@@ -25,41 +26,44 @@
         </nav>
     </header>
 
-    <main class="login-main" id="conteudo">
-        <a class="back-link" href="../index.html">
+    <main class="conteudo-login" id="conteudo" tabindex="-1">
+        <a class="link-voltar" href="../index.html">
             <img src="../images/icons/chevron-left.png" alt="">
             Voltar
         </a>
 
-        <section class="login-card" aria-labelledby="login-title">
-            <div class="login-content">
-                <h1 id="login-title">Entrar</h1>
-                <p class="login-intro">Acesse sua conta para jogar</p>
+        <section class="cartao-login" aria-labelledby="titulo-login">
+            <div class="conteudo-cartao-login">
+                <h1 id="titulo-login">Entrar</h1>
+                <p class="introducao-login">Acesse sua conta para jogar</p>
 
-                <form class="login-form" action="#" method="post">
-                    <div class="form-field">
+                <form class="formulario-login" novalidate>
+                    <div class="campo-formulario">
                         <label for="email">E-mail</label>
-                        <div class="input-wrap">
+                        <div class="grupo-entrada">
                             <img src="../images/icons/email.png" alt="">
-                            <input id="email" name="email" type="email" autocomplete="email" placeholder="nome@email.com" required>
+                            <input id="email" name="email" type="email" autocomplete="email" placeholder="nome@email.com" aria-describedby="erro-email" required>
                         </div>
+                        <p class="erro-campo" id="erro-email" aria-live="polite"></p>
                     </div>
 
-                    <div class="form-field">
+                    <div class="campo-formulario">
                         <label for="senha">Senha</label>
-                        <div class="input-wrap">
+                        <div class="grupo-entrada">
                             <img src="../images/icons/lock.png" alt="">
-                            <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                            <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="••••••••" aria-describedby="erro-senha" required>
                         </div>
+                        <p class="erro-campo" id="erro-senha" aria-live="polite"></p>
                     </div>
 
-                    <p class="password-help"><a href="#recuperar-senha">Esqueci minha senha</a></p>
-                    <button class="submit-button" type="submit">Entrar</button>
+                    <p class="ajuda-senha"><a href="#recuperar-senha">Esqueci minha senha</a></p>
+                    <button class="botao-enviar" type="submit">Entrar</button>
+                    <p class="mensagem-formulario" id="mensagem-login" role="status" aria-live="polite"></p>
                 </form>
 
-                <p class="signup-prompt" id="cadastro">Não tem conta? <a href="#cadastro">Cadastre-se</a></p>
+                <p class="aviso-cadastro" id="cadastro">Não tem conta? <a href="#cadastro">Cadastre-se</a></p>
             </div>
-            <div class="login-art" role="img" aria-label="Personagens do Cartoon Network em uma cena Arcade"></div>
+            <div class="arte-login" role="img" aria-label="Personagens do Cartoon Network em uma cena Arcade"></div>
         </section>
     </main>
 </body>
