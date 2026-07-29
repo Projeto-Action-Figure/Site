@@ -47,6 +47,7 @@ function validarFormulario(formulario) {
 function configurarFormulario(formulario) {
     const mensagemFormulario = formulario.querySelector(".mensagem-formulario");
     const ehCadastro = formulario.classList.contains("formulario-cadastro");
+    const ehRedefinicaoSenha = formulario.classList.contains("formulario-redefinir-senha");
 
     formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
@@ -59,8 +60,13 @@ function configurarFormulario(formulario) {
             return;
         }
 
-        mensagemFormulario.textContent = ehCadastro
-            ? "Dados validados. O cadastro ainda não está conectado a um servidor."
+        if (ehCadastro) {
+            mensagemFormulario.textContent = "Dados validados. O cadastro ainda não está conectado a um servidor.";
+            return;
+        }
+
+        mensagemFormulario.textContent = ehRedefinicaoSenha
+            ? "Senha validada. O e-mail de confirmação ainda não está conectado a um servidor."
             : "Dados validados. O login ainda não está conectado a um servidor.";
     });
 
@@ -72,7 +78,7 @@ function configurarFormulario(formulario) {
 }
 
 function configurarFormulariosAutenticacao() {
-    const formularios = document.querySelectorAll(".formulario-login, .formulario-cadastro");
+    const formularios = document.querySelectorAll(".formulario-login, .formulario-cadastro, .formulario-redefinir-senha");
 
     formularios.forEach(configurarFormulario);
 }

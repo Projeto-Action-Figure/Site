@@ -37,7 +37,7 @@ Após a implementação dessa lei e sendo obrigatória em janeiro de 2016, muita
 Além dessas mudança, as empresas também devem ter um certo número de cotas de pessoas deficientes, que não está na LBI, mas que está vetado na Lei 8.213/1991 no **Art. 93**, que varia de acordo com a quantidade de empregados na empresa.
 
 #### Fontes
-[Planalto (Lei 13.146/2015)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm)
+[Planalto (Lei 13.146/2015)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm)  
 [Planalto (Lei 8.213/1991)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm)
 
 ## Como um desenvolvedor jr no picpay deveria se proteger legalmente? Quais documentos e processos de trabalho evidenciam conformidade com a LBI?
@@ -101,7 +101,7 @@ Há 3 passos principais:
 - Avaliação de acessibilidade: Após a criação do site de acordo com os padrões Web e as diretrizes de acessibilidade, é necessário testá-lo para garantir sua acessibilidade. Deve-se lembrar que após cada teste, **os ajustes devidos devem ser feitos e novamente testados.**
 
 #### Fontes
-[eMAG](https://emag.governoeletronico.gov.br/)
+[eMAG](https://emag.governoeletronico.gov.br/)  
 [GOV.BR](https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital/modelo-de-acessibilidade)
 
 ## ADA — Americans with Disabilities Act
@@ -129,8 +129,8 @@ Em 2023, foram registradas 2.794 ações federais relacionadas à acessibilidade
 Durante o governo Trump, a ADA não foi revogada, mas em 2017 foram retiradas propostas de regulamentação sobre acessibilidade web, o que reduziu a clareza na aplicação da lei no ambiente digital.
 
 #### Fontes
-ADA.gov — Introduction to the ADA
-ADA.gov — Web Accessibility Guidance
-EEOC — ADA Title I
-Seyfarth Shaw — Website Accessibility Lawsuits 2023
+ADA.gov — Introduction to the ADA  
+ADA.gov — Web Accessibility Guidance  
+EEOC — ADA Title I  
+Seyfarth Shaw — Website Accessibility Lawsuits 2023  
 Federal Register — Withdrawal of ADA web rules (2017)

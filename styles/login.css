@@ -244,6 +244,10 @@
     margin-top: 24px;
 }
 
+.formulario-redefinir-senha {
+    margin-top: 36px;
+}
+
 .formulario-cadastro .campo-formulario + .campo-formulario {
     margin-top: 12px;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Entre na sua conta TCG Cartoon.">
+    <meta name="description" content="Redefina a senha da sua conta TCG Cartoon.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/login.css">
     <script src="../scripts/acessibilidade.js" defer></script>
-    <title>Entrar | TCG Cartoon</title>
+    <title>Redefinir senha | TCG Cartoon</title>
 </head>
 <body class="pagina-login">
-    <a class="skip-link" href="#conteudo">Pular para o formulário de login</a>
+    <a class="skip-link" href="#conteudo">Pular para o formulário de redefinição de senha</a>
 
     <header class="barra-superior barra-login">
         <a class="brand" href="../index.html" aria-label="TCG Cartoon - início">
@@ -22,22 +22,25 @@
             <span class="brand-name">TCG CARTOON</span>
         </a>
         <nav aria-label="Navegação principal">
-            <a class="signup-button" href="cadastro.html">Cadastre-se</a>
+            <a class="login-button" href="login.html">
+                <img src="../images/icons/account-circle-small.png" alt="">
+                Entrar
+            </a>
         </nav>
     </header>
 
     <main class="conteudo-login" id="conteudo" tabindex="-1">
-        <a class="link-voltar" href="../index.html">
+        <a class="link-voltar" href="login.html">
             <img src="../images/icons/chevron-left.png" alt="">
             Voltar
         </a>
 
-        <section class="cartao-login" aria-labelledby="titulo-login">
-            <div class="conteudo-cartao-login">
-                <h1 id="titulo-login">Entrar</h1>
-                <p class="introducao-login">Acesse sua conta para jogar</p>
+        <section class="cartao-cadastro" aria-labelledby="titulo-redefinir-senha">
+            <div class="conteudo-cartao-cadastro">
+                <h1 id="titulo-redefinir-senha">Redefinir senha</h1>
+                <p class="introducao-cadastro">Preencha as informações solicitadas.<br>Um e-mail de confirmação será enviado ao e-mail preenchido.</p>
 
-                <form class="formulario-login" novalidate>
+                <form class="formulario-redefinir-senha" novalidate>
                     <div class="campo-formulario">
                         <label for="email">E-mail</label>
                         <div class="grupo-entrada">
@@ -51,19 +54,25 @@
                         <label for="senha">Senha</label>
                         <div class="grupo-entrada">
                             <img src="../images/icons/lock.png" alt="">
-                            <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="••••••••" aria-describedby="erro-senha" required>
+                            <input id="senha" name="senha" type="password" autocomplete="new-password" minlength="8" placeholder="Mínimo 8 caracteres" aria-describedby="erro-senha" required>
                         </div>
                         <p class="erro-campo" id="erro-senha" aria-live="polite"></p>
                     </div>
 
-                    <p class="ajuda-senha"><a href="redefinir-senha.html">Esqueci minha senha</a></p>
-                    <button class="botao-enviar" type="submit">Entrar</button>
-                    <p class="mensagem-formulario" id="mensagem-login" role="status" aria-live="polite"></p>
-                </form>
+                    <div class="campo-formulario">
+                        <label for="confirmar-senha">Confirmar senha</label>
+                        <div class="grupo-entrada">
+                            <img src="../images/icons/lock.png" alt="">
+                            <input id="confirmar-senha" name="confirmar-senha" type="password" autocomplete="new-password" minlength="8" placeholder="Repita sua senha" aria-describedby="erro-confirmar-senha" required>
+                        </div>
+                        <p class="erro-campo" id="erro-confirmar-senha" aria-live="polite"></p>
+                    </div>
 
-                <p class="aviso-cadastro">Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+                    <button class="botao-enviar" type="submit">Redefinir senha</button>
+                    <p class="mensagem-formulario" id="mensagem-redefinir-senha" role="status" aria-live="polite"></p>
+                </form>
             </div>
-            <div class="arte-login" role="img" aria-label="Personagens do Cartoon Network em uma cena Arcade"></div>
+            <div class="arte-cadastro" role="img" aria-label="Personagens do Cartoon Network em uma cena Arcade"></div>
         </section>
     </main>
 </body>
