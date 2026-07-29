@@ -38,7 +38,6 @@ Além dessas mudança, as empresas também devem ter um certo número de cotas d
 
 #### Fontes
 [Planalto (Lei 13.146/2015)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm)
-
 [Planalto (Lei 8.213/1991)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm)
 
 ## Como um desenvolvedor jr no picpay deveria se proteger legalmente? Quais documentos e processos de trabalho evidenciam conformidade com a LBI?
@@ -103,7 +102,6 @@ Há 3 passos principais:
 
 #### Fontes
 [eMAG](https://emag.governoeletronico.gov.br/)
-
 [GOV.BR](https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital/modelo-de-acessibilidade)
 
 ## ADA — Americans with Disabilities Act
@@ -132,11 +130,7 @@ Durante o governo Trump, a ADA não foi revogada, mas em 2017 foram retiradas pr
 
 #### Fontes
 ADA.gov — Introduction to the ADA
-
 ADA.gov — Web Accessibility Guidance
-
 EEOC — ADA Title I
-
 Seyfarth Shaw — Website Accessibility Lawsuits 2023
-
 Federal Register — Withdrawal of ADA web rules (2017)
