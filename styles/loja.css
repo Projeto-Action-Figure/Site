@@ -41,6 +41,30 @@
     padding: 18px 24px 36px;
 }
 
+.link-voltar-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 10px 0 6px;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.link-voltar-home:hover {
+    background: #151f34;
+}
+
+.link-voltar-home img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
 .conteudo-loja h1 {
     margin: 0;
     color: var(--text);

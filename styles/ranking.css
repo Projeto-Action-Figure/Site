@@ -1,0 +1,216 @@
+.pagina-ranking main {
+    grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.conteudo-ranking {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 380px));
+    align-content: center;
+    justify-content: center;
+    gap: clamp(44px, 8vw, 96px);
+    min-height: 0;
+    padding: 42px 24px 34px;
+}
+
+.link-voltar-home {
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 10px 0 6px;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.link-voltar-home:hover {
+    background: #151f34;
+}
+
+.link-voltar-home img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.painel-ranking {
+    min-width: 0;
+}
+
+.cabecalho-ranking {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    margin-bottom: 17px;
+}
+
+.cabecalho-ranking h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.cabecalho-ranking img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.lista-ranking {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.posicao-ranking {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    min-height: 39px;
+    padding: 6px 14px;
+    border: 2px solid #263a60;
+    border-radius: 7px;
+    background: #10192b;
+    color: #c7cdd8;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.posicao-ranking .numero-ranking {
+    font-variant-numeric: tabular-nums;
+}
+
+.posicao-ranking:nth-child(1) .numero-ranking,
+.posicao-ranking:nth-child(2) .numero-ranking {
+    color: var(--yellow);
+}
+
+.posicao-ranking:nth-child(3) .numero-ranking {
+    color: #ed8b12;
+}
+
+.nome-ranking {
+    overflow: hidden;
+    color: var(--text);
+    font-weight: 500;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pontos-ranking {
+    padding-left: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.estado-ranking {
+    grid-column: 1 / -1;
+    min-height: 1.4em;
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.estado-ranking.concluido {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.navegacao-ranking .item-navegacao.ativo {
+    background: var(--yellow);
+    color: #050505;
+}
+
+.navegacao-ranking .item-navegacao.ativo img {
+    filter: brightness(0);
+}
+
+.navegacao-ranking .item-navegacao.ativo small {
+    color: #42461c;
+}
+
+@media (max-width: 760px) {
+    .conteudo-ranking {
+        grid-template-columns: minmax(0, 480px);
+        align-content: start;
+        gap: 38px;
+        padding: 38px 18px 30px;
+    }
+
+    .link-voltar-home {
+        top: 12px;
+        left: 18px;
+    }
+
+    .estado-ranking {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 540px) {
+    .conteudo-ranking {
+        gap: 30px;
+        padding: 28px 14px 24px;
+    }
+
+    .link-voltar-home {
+        top: 6px;
+        left: 14px;
+    }
+
+    .cabecalho-ranking {
+        gap: 10px;
+        margin-bottom: 13px;
+    }
+
+    .cabecalho-ranking img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .lista-ranking {
+        gap: 7px;
+    }
+
+    .posicao-ranking {
+        grid-template-columns: 34px minmax(0, 1fr) auto;
+        min-height: 44px;
+        padding-inline: 11px;
+        font-size: 13px;
+    }
+
+    .pontos-ranking {
+        font-size: 11px;
+    }
+}

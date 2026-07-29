@@ -374,9 +374,6 @@ function configurarInteracoes() {
         }
     });
 
-    document.querySelector('[data-secao="Ranking"]').addEventListener("click", () => {
-        exibirMensagem("A seção Ranking estará disponível em breve.");
-    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
