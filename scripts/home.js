@@ -35,7 +35,7 @@ function configurarInteracoes() {
         window.location.assign("batalha.html");
     });
 
-    document.querySelectorAll(".item-navegacao").forEach((botao) => {
+    document.querySelectorAll(".item-navegacao[data-secao]").forEach((botao) => {
         botao.addEventListener("click", () => {
             exibirMensagem(`A seção ${botao.dataset.secao} estará disponível em breve.`);
         });

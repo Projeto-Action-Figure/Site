@@ -1,8 +1,6 @@
 "use strict";
 
 const ENERGIA_MAXIMA = 3;
-const DANO_ATAQUE = 20;
-const DANO_RIVAL = 16;
 const TEMPO_INICIAL = 25;
 const ATRASO_SAIDA_BATALHA = 1200;
 const TAMANHO_CAMPO = 3;
@@ -12,19 +10,19 @@ const estado = {
         vida: 4,
         energia: ENERGIA_MAXIMA,
         cartas: [
-            { nome: "Gumball", vida: 90, vidaMaxima: 90 },
-            { nome: "Darwin", vida: 76, vidaMaxima: 76 },
-            { nome: "Finn", vida: 84, vidaMaxima: 84 },
-            { nome: "Jake", vida: 72, vidaMaxima: 72 },
-            { nome: "Mordecai", vida: 80, vidaMaxima: 80 }
+            { nome: "Gumball", vida: 90, vidaMaxima: 90, dano: 20 },
+            { nome: "Darwin", vida: 76, vidaMaxima: 76, dano: 18 },
+            { nome: "Finn", vida: 84, vidaMaxima: 84, dano: 22 },
+            { nome: "Jake", vida: 72, vidaMaxima: 72, dano: 16 },
+            { nome: "Mordecai", vida: 80, vidaMaxima: 80, dano: 19 }
         ]
     },
     adversario: {
         vida: 4,
         cartas: [
-            { nome: "Aku", vida: 88, vidaMaxima: 88 },
-            { nome: "Vilgax", vida: 78, vidaMaxima: 78 },
-            { nome: "Mandark", vida: 70, vidaMaxima: 70 }
+            { nome: "Aku", vida: 88, vidaMaxima: 88, dano: 20 },
+            { nome: "Vilgax", vida: 78, vidaMaxima: 78, dano: 19 },
+            { nome: "Mandark", vida: 70, vidaMaxima: 70, dano: 18 }
         ]
     },
     cartaSelecionada: null,
@@ -42,15 +40,26 @@ function obterCartaEmCampo(lado, indiceCarta) {
     return lado.cartas[indiceCarta];
 }
 
+function criarAreaImagemCarta() {
+    const imagem = document.createElement("span");
+
+    imagem.className = "area-imagem-carta";
+    imagem.setAttribute("aria-hidden", "true");
+
+    return imagem;
+}
+
 function criarDadosCarta(carta) {
     const dados = document.createElement("span");
     const nome = document.createElement("strong");
     const vida = document.createElement("span");
+    const dano = document.createElement("span");
 
     dados.className = "dados-carta";
     nome.textContent = carta.nome;
-    vida.textContent = `HP ${Math.max(0, carta.vida)}/${carta.vidaMaxima}`;
-    dados.append(nome, vida);
+    vida.textContent = `HP ${Math.max(0, carta.vida)}`;
+    dano.textContent = `DMG ${carta.dano}`;
+    dados.append(nome, vida, dano);
 
     return dados;
 }
@@ -73,18 +82,18 @@ function criarCartaCampo(carta, posicao, indiceCarta, tipoCampo) {
         botao.dataset.indiceCarta = String(indiceCarta);
         botao.setAttribute("aria-pressed", String(estaSelecionada));
         botao.setAttribute("aria-label", ehCartaJogador
-            ? `Selecionar ${carta.nome}, ${Math.max(0, carta.vida)} de ${carta.vidaMaxima} pontos de vida para atacar ou trocar`
-            : `Selecionar ${carta.nome}, ${Math.max(0, carta.vida)} de ${carta.vidaMaxima} pontos de vida como alvo do ataque`);
+            ? `Selecionar ${carta.nome}, HP ${Math.max(0, carta.vida)} de ${carta.vidaMaxima}, dano ${carta.dano}, para atacar ou trocar`
+            : `Selecionar ${carta.nome}, HP ${Math.max(0, carta.vida)} de ${carta.vidaMaxima}, dano ${carta.dano}, como alvo do ataque`);
         botao.disabled = !estado.turnoDoJogador || estado.partidaEncerrada;
-        botao.append(criarDadosCarta(carta));
+        botao.append(criarAreaImagemCarta(), criarDadosCarta(carta));
         item.classList.toggle("selecionada", estaSelecionada);
         item.classList.toggle("alvo", ehCartaRival);
         item.append(botao);
         return item;
     }
 
-    item.setAttribute("aria-label", `${carta.nome}, ${Math.max(0, carta.vida)} de ${carta.vidaMaxima} pontos de vida, carta ativa do adversário`);
-    item.append(criarDadosCarta(carta));
+    item.setAttribute("aria-label", `${carta.nome}, HP ${Math.max(0, carta.vida)} de ${carta.vidaMaxima}, dano ${carta.dano}, carta ativa do adversário`);
+    item.append(criarAreaImagemCarta(), criarDadosCarta(carta));
 
     return item;
 }
@@ -114,9 +123,9 @@ function renderizarMao() {
         botao.className = "carta-mao";
         botao.dataset.indiceCarta = String(indiceCarta);
         botao.setAttribute("aria-pressed", String(estado.cartaSelecionada === indiceCarta));
-        botao.setAttribute("aria-label", `Selecionar ${carta.nome}, ${Math.max(0, carta.vida)} de ${carta.vidaMaxima} pontos de vida para troca`);
+        botao.setAttribute("aria-label", `Selecionar ${carta.nome}, HP ${Math.max(0, carta.vida)} de ${carta.vidaMaxima}, dano ${carta.dano}, para troca`);
         botao.disabled = !estado.turnoDoJogador || estado.partidaEncerrada;
-        botao.append(criarDadosCarta(carta));
+        botao.append(criarAreaImagemCarta(), criarDadosCarta(carta));
         item.append(botao);
         fragmento.append(item);
     });
@@ -255,8 +264,8 @@ function atacar() {
     const cartaRival = obterCartaEmCampo(estado.adversario, estado.indiceAlvoRival);
 
     estado.jogador.energia -= 1;
-    cartaRival.vida -= DANO_ATAQUE;
-    exibirMensagem(`${cartaJogador.nome} causou ${DANO_ATAQUE} de dano a ${cartaRival.nome}.`);
+    cartaRival.vida -= cartaJogador.dano;
+    exibirMensagem(`${cartaJogador.nome} causou ${cartaJogador.dano} de dano a ${cartaRival.nome}.`);
     verificarResultado();
     atualizarInterface(obterSeletorFocoAposAcao());
 }
@@ -291,8 +300,8 @@ function iniciarTurnoAdversario(seletorFoco = "") {
         const cartaJogador = obterCartaEmCampo(estado.jogador, estado.indiceCartaCampo);
         const cartaRival = obterCartaEmCampo(estado.adversario, estado.indiceCartaRival);
 
-        cartaJogador.vida -= DANO_RIVAL;
-        exibirMensagem(`${cartaRival.nome} causou ${DANO_RIVAL} de dano a ${cartaJogador.nome}.`, "adversario");
+        cartaJogador.vida -= cartaRival.dano;
+        exibirMensagem(`${cartaRival.nome} causou ${cartaRival.dano} de dano a ${cartaJogador.nome}.`, "adversario");
 
         if (verificarResultado()) {
             atualizarInterface();

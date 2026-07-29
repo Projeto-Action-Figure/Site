@@ -1,0 +1,301 @@
+.pagina-cartas main {
+    display: grid;
+    min-height: calc(100vh - 74px);
+    padding: 0;
+    grid-template-rows: 1fr auto;
+}
+
+.voltar-home {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 10px 0 6px;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.voltar-home:hover {
+    background: #151f34;
+}
+
+.voltar-home img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.conteudo-cartas {
+    position: relative;
+    overflow: auto;
+    padding: 18px 24px 28px;
+}
+
+.cabecalho-colecao {
+    padding-top: 48px;
+    text-align: center;
+}
+
+.cabecalho-colecao h1,
+.secao-cartas h2 {
+    margin: 0;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.cabecalho-colecao h1 {
+    font-size: clamp(25px, 3vw, 29px);
+    line-height: 1.25;
+}
+
+.cabecalho-colecao p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.secao-cartas {
+    width: min(100%, 896px);
+    margin: 42px auto 0;
+}
+
+.secao-cartas h2 {
+    font-size: 18px;
+    text-align: center;
+}
+
+.secao-colecao {
+    width: min(100%, 1044px);
+    margin-top: 46px;
+}
+
+.estado-cartas {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.grade-deck,
+.grade-colecao {
+    display: grid;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.grade-deck {
+    grid-template-columns: repeat(8, minmax(0, 98px));
+    justify-content: center;
+    gap: 16px;
+}
+
+.grade-colecao {
+    grid-template-columns: repeat(9, minmax(0, 98px));
+    justify-content: center;
+    gap: 16px;
+}
+
+.slot-deck,
+.carta-colecao {
+    position: relative;
+    display: block;
+    width: 98px;
+    aspect-ratio: 0.72;
+    overflow: hidden;
+    border: 2px solid #263a60;
+    border-radius: 8px;
+    background: #10192b;
+}
+
+.slot-deck.vazio::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    border: 1px solid rgb(255 255 255 / 3%);
+}
+
+.carta-deck,
+.carta-colecao {
+    padding: 0;
+    color: var(--text);
+    cursor: pointer;
+    font-family: "Poppins", Arial, sans-serif;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.carta-deck {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+}
+
+.carta-deck:hover,
+.carta-colecao:hover:not(:disabled) {
+    border-color: var(--yellow);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 14px rgb(0 0 0 / 30%);
+}
+
+.carta-colecao:disabled {
+    cursor: not-allowed;
+    opacity: 0.58;
+}
+
+.imagem-carta {
+    display: grid;
+    height: 68%;
+    place-items: center;
+    border-bottom: 1px solid #263a60;
+    background: #0c1424;
+}
+
+.imagem-carta img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 0.25;
+}
+
+.imagem-carta img:not([alt=""]) {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+.dados-carta-colecao {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 5px;
+    min-height: 32%;
+    padding: 5px 6px;
+    line-height: 1.1;
+}
+
+.dados-carta-colecao strong {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dados-carta-colecao span {
+    color: #c7cdd8;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.dados-carta-colecao span:last-child {
+    color: var(--yellow);
+    text-align: right;
+}
+
+.navegacao-cartas .item-navegacao {
+    text-decoration: none;
+}
+
+.navegacao-cartas .item-navegacao.ativo {
+    background: var(--yellow);
+    color: #050505;
+}
+
+.navegacao-cartas .item-navegacao.ativo small {
+    color: #35350c;
+}
+
+.navegacao-cartas .item-navegacao.ativo img {
+    filter: brightness(0);
+}
+
+.mensagem-colecao {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .grade-deck {
+        grid-template-columns: repeat(4, minmax(0, 98px));
+    }
+
+    .grade-colecao {
+        grid-template-columns: repeat(6, minmax(0, 98px));
+    }
+}
+
+@media (max-width: 540px) {
+    .pagina-cartas main {
+        min-height: calc(100vh - 64px);
+    }
+
+    .conteudo-cartas {
+        padding: 22px 12px 18px;
+    }
+
+    .voltar-home {
+        top: 20px;
+        left: 12px;
+        height: 44px;
+    }
+
+    .cabecalho-colecao p {
+        font-size: 14px;
+    }
+
+    .secao-cartas {
+        margin-top: 28px;
+    }
+
+    .secao-colecao {
+        margin-top: 34px;
+    }
+
+    .grade-deck,
+    .grade-colecao {
+        grid-template-columns: repeat(3, minmax(0, 88px));
+        gap: 12px;
+    }
+
+    .slot-deck,
+    .carta-colecao {
+        width: 88px;
+    }
+
+    .dados-carta-colecao strong {
+        font-size: 9px;
+    }
+
+    .dados-carta-colecao span {
+        font-size: 7px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carta-deck,
+    .carta-colecao {
+        transition: none;
+    }
+}

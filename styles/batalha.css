@@ -142,7 +142,7 @@
     justify-content: flex-end;
     width: 98px;
     aspect-ratio: 0.72;
-    padding: 8px;
+    padding: 0;
 }
 
 .carta-campo.ativa {
@@ -179,7 +179,9 @@
 
 .botao-carta-campo {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
     width: 100%;
     height: 100%;
     padding: 0;
@@ -195,27 +197,45 @@
     cursor: not-allowed;
 }
 
+.area-imagem-carta {
+    display: block;
+    width: 100%;
+    height: 68%;
+    flex-shrink: 0;
+    border-bottom: 1px solid #263a60;
+    background: #0c1424;
+}
+
 .dados-carta {
     position: relative;
     z-index: 1;
     display: grid;
-    gap: 2px;
-    color: var(--text);
-    font-size: 10px;
-    line-height: 1.15;
+    grid-template-columns: 1fr auto;
+    gap: 2px 5px;
+    min-height: 32%;
+    padding: 5px 6px;
+    line-height: 1.1;
     text-align: left;
 }
 
 .dados-carta strong {
+    grid-column: 1 / -1;
     overflow: hidden;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .dados-carta span {
-    color: #d2d6df;
+    color: #c7cdd8;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.dados-carta span:last-child {
+    color: var(--yellow);
+    text-align: right;
 }
 
 .indicador-turno {
@@ -272,9 +292,12 @@
 }
 
 .carta-mao {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 98px;
     aspect-ratio: 0.72;
-    padding: 8px;
+    padding: 0;
     color: var(--text);
     cursor: pointer;
     font-family: "Poppins", Arial, sans-serif;
