@@ -1,0 +1,226 @@
+.pagina-perfil main {
+    display: block;
+    min-height: calc(100vh - 74px);
+    padding: 24px clamp(24px, 5.8vw, 64px) 48px;
+}
+
+.link-voltar-perfil {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 44px;
+    margin-bottom: 28px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.link-voltar-perfil img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+}
+
+.painel-perfil {
+    width: min(100%, 954px);
+    min-height: 436px;
+    padding: 38px 48px;
+    border: 2px solid #263a60;
+    border-radius: 14px;
+    background: #111a2c;
+}
+
+.painel-perfil h1 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(24px, 2.5vw, 27px);
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.introducao-perfil {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.formulario-perfil {
+    width: min(100%, 550px);
+    margin-top: 27px;
+}
+
+.campo-perfil + .campo-perfil {
+    margin-top: 15px;
+}
+
+.campo-perfil label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e4e6eb;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.grupo-entrada-perfil {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 13px;
+    border: 1px solid #2b426d;
+    border-radius: 7px;
+    background: #050a13;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.grupo-entrada-perfil:focus-within {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgb(241 243 49 / 20%);
+}
+
+.grupo-entrada-perfil img {
+    flex: 0 0 auto;
+    width: 19px;
+    height: 19px;
+    margin-right: 20px;
+    object-fit: contain;
+}
+
+.grupo-entrada-perfil input {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 15px;
+}
+
+.grupo-entrada-perfil input::placeholder {
+    color: #b7bdc9;
+    opacity: 1;
+}
+
+.erro-perfil,
+.mensagem-perfil {
+    min-height: 1.4em;
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.erro-perfil {
+    color: #ffb4ab;
+}
+
+.botao-salvar-perfil {
+    width: 100%;
+    min-height: 53px;
+    margin-top: 27px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--yellow);
+    color: #050505;
+    cursor: pointer;
+    font: 600 12px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.botao-salvar-perfil:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgb(0 0 0 / 28%);
+    background: #ffff4d;
+}
+
+.mensagem-perfil {
+    color: #d9dc49;
+    text-align: center;
+}
+
+@media (max-width: 540px) {
+    .pagina-perfil main {
+        min-height: calc(100vh - 64px);
+        padding: 16px 16px 32px;
+    }
+
+    .link-voltar-perfil {
+        margin-bottom: 16px;
+        font-size: 16px;
+    }
+
+    .painel-perfil {
+        min-height: 0;
+        padding: 28px 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pagina-perfil main {
+        padding-top: 32px;
+    }
+
+    .link-voltar-perfil {
+        margin-bottom: 34px;
+        font-size: 20px;
+    }
+
+    .painel-perfil {
+        width: min(100%, 1200px);
+        min-height: 548px;
+        padding: 48px 60px;
+    }
+
+    .painel-perfil h1 {
+        font-size: 32px;
+    }
+
+    .introducao-perfil {
+        font-size: 17px;
+    }
+
+    .formulario-perfil {
+        width: min(100%, 680px);
+        margin-top: 34px;
+    }
+
+    .campo-perfil + .campo-perfil {
+        margin-top: 20px;
+    }
+
+    .campo-perfil label {
+        font-size: 17px;
+    }
+
+    .grupo-entrada-perfil {
+        min-height: 56px;
+        padding-inline: 16px;
+    }
+
+    .grupo-entrada-perfil img {
+        width: 22px;
+        height: 22px;
+        margin-right: 22px;
+    }
+
+    .grupo-entrada-perfil input {
+        min-height: 54px;
+        font-size: 17px;
+    }
+
+    .botao-salvar-perfil {
+        min-height: 62px;
+        margin-top: 34px;
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grupo-entrada-perfil,
+    .botao-salvar-perfil {
+        transition: none;
+    }
+}
