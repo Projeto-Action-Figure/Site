@@ -322,11 +322,24 @@ function confirmarCompra(idProduto, metodo) {
         return;
     }
 
-    const total = metodo === "moedas"
-        ? `${produto.precoMoedas * quantidade} moedas`
-        : formatarReais(produto.precoReais * quantidade);
+    if (metodo === "reais") {
+        const pedido = {
+            descricao: `${textoQuantidade(produto, quantidade)} de ${obterNomeProduto(produto)}`,
+            total: produto.precoReais * quantidade,
+            pacotes: produto.visual === "pacote" ? produto.quantidadePorUnidade * quantidade : 0
+        };
 
-    exibirMensagem(`Compra local de ${textoQuantidade(produto, quantidade)} de ${obterNomeProduto(produto)} por ${total} confirmada.`);
+        try {
+            sessionStorage.setItem("pedido-pendente", JSON.stringify(pedido));
+            window.location.assign("pagamento.html");
+        } catch {
+            exibirMensagem("Não foi possível iniciar o pagamento. Atualize a página e tente novamente.");
+        }
+
+        return;
+    }
+
+    exibirMensagem(`Compra local de ${textoQuantidade(produto, quantidade)} de ${obterNomeProduto(produto)} por ${produto.precoMoedas * quantidade} moedas confirmada.`);
 }
 
 function formatarTempoReestoque() {

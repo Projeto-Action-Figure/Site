@@ -35,6 +35,7 @@
 }
 
 .cabecalho-colecao {
+    position: relative;
     display: grid;
     gap: 4px;
     text-align: center;
@@ -42,6 +43,40 @@
 
 .cabecalho-colecao .voltar-home {
     justify-self: start;
+}
+
+.botao-abrir-pacote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 9px 13px;
+    border: 2px solid var(--yellow);
+    border-radius: 7px;
+    background: var(--yellow);
+    color: #050505;
+    cursor: pointer;
+    font: 600 13px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.botao-abrir-pacote:hover {
+    background: #ffff4d;
+}
+
+.botao-abrir-pacote img {
+    width: 23px;
+    height: 23px;
+    filter: brightness(0);
+    object-fit: contain;
+}
+
+.botao-abrir-pacote[hidden] {
+    display: none;
 }
 
 .cabecalho-colecao h1,
@@ -264,6 +299,16 @@
 
     .voltar-home {
         height: 44px;
+    }
+
+    .botao-abrir-pacote {
+        padding-inline: 10px;
+        font-size: 11px;
+    }
+
+    .botao-abrir-pacote img {
+        width: 20px;
+        height: 20px;
     }
 
     .cabecalho-colecao p {

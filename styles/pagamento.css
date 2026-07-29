@@ -1,0 +1,327 @@
+.pagina-pagamento main {
+    display: block;
+    min-height: calc(100vh - 74px);
+    padding: 0;
+}
+
+.conteudo-pagamento {
+    min-height: calc(100vh - 74px);
+    padding: 18px 28px 40px;
+}
+
+.link-voltar-loja {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 10px 0 0;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.link-voltar-loja:hover {
+    background: #151f34;
+    text-decoration: none;
+}
+
+.link-voltar-loja img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.painel-pagamento,
+.confirmacao-pagamento {
+    width: min(100%, 954px);
+    min-height: 516px;
+    margin: 25px auto 0;
+    padding: 38px 48px 40px;
+    border: 2px solid #263a60;
+    border-radius: 16px;
+    background: #10192b;
+}
+
+.cabecalho-pagamento h1,
+.cabecalho-pagamento p,
+.resumo-pagamento h2,
+.descricao-pedido,
+.metodos-pagamento legend,
+.instrucoes-pix,
+.erro-pagamento,
+.mensagem-pagamento {
+    margin: 0;
+}
+
+.cabecalho-pagamento h1 {
+    color: var(--text);
+    font-size: clamp(25px, 3vw, 29px);
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.cabecalho-pagamento p,
+.descricao-pedido,
+.instrucoes-pix {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.resumo-pagamento {
+    width: min(100%, 550px);
+    margin-top: 26px;
+}
+
+.resumo-pagamento h2,
+.metodos-pagamento legend {
+    color: #c7cdd8;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.valor-compra {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 45px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: 2px solid #263a60;
+    border-radius: 7px;
+    background: #050a13;
+    color: #c7cdd8;
+    font-size: 14px;
+}
+
+.valor-compra img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.descricao-pedido:not(:empty) {
+    margin-top: 8px;
+}
+
+.metodos-pagamento {
+    width: min(100%, 550px);
+    margin: 15px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.metodos-pagamento legend {
+    margin-bottom: 16px;
+}
+
+.opcoes-pagamento {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 54px;
+}
+
+.opcao-pagamento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    min-height: 76px;
+    padding: 12px;
+    border: 1px solid var(--yellow);
+    border-radius: 7px;
+    background: #050a13;
+    color: var(--text);
+    cursor: pointer;
+    font: 600 26px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.opcao-pagamento:hover,
+.opcao-pagamento[aria-pressed="true"] {
+    background: #1b2539;
+}
+
+.opcao-pagamento[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 1px var(--yellow);
+}
+
+.opcao-pagamento img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.instrucoes-pix {
+    width: min(100%, 550px);
+    margin-top: 18px;
+}
+
+.campos-cartao {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: min(100%, 550px);
+    margin-top: 18px;
+}
+
+.campos-cartao[hidden],
+.confirmacao-pagamento[hidden] {
+    display: none;
+}
+
+.campo-cartao {
+    display: grid;
+    gap: 6px;
+}
+
+.campo-cartao-largo,
+.erro-pagamento {
+    grid-column: 1 / -1;
+}
+
+.campo-cartao label {
+    color: #c7cdd8;
+    font-size: 13px;
+}
+
+.campo-cartao input {
+    width: 100%;
+    min-height: 44px;
+    padding: 9px 12px;
+    border: 2px solid #263a60;
+    border-radius: 7px;
+    background: #050a13;
+    color: var(--text);
+    font: 400 14px/1 "Poppins", Arial, sans-serif;
+}
+
+.campo-cartao input::placeholder {
+    color: #7f899c;
+}
+
+.erro-pagamento,
+.mensagem-pagamento {
+    min-height: 1.4em;
+    color: #ffb6ba;
+    font-size: 13px;
+}
+
+.botao-finalizar,
+.botao-continuar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 550px);
+    min-height: 53px;
+    margin-top: 89px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--yellow);
+    color: #050505;
+    cursor: pointer;
+    font: 600 13px/1 "Poppins", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.botao-finalizar:hover:not(:disabled),
+.botao-continuar:hover {
+    background: #ffff4d;
+    text-decoration: none;
+}
+
+.botao-finalizar:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+}
+
+.mensagem-pagamento {
+    width: min(100%, 550px);
+    margin-top: 8px;
+}
+
+.confirmacao-pagamento {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.confirmacao-pagamento > img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+}
+
+.confirmacao-pagamento h2 {
+    margin: 16px 0 8px;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.confirmacao-pagamento p {
+    max-width: 420px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.confirmacao-pagamento .botao-continuar {
+    width: min(100%, 280px);
+    margin-top: 28px;
+}
+
+@media (max-width: 620px) {
+    .pagina-pagamento main,
+    .conteudo-pagamento {
+        min-height: calc(100vh - 64px);
+    }
+
+    .conteudo-pagamento {
+        padding: 12px 14px 28px;
+    }
+
+    .link-voltar-loja {
+        font-size: 16px;
+    }
+
+    .painel-pagamento,
+    .confirmacao-pagamento {
+        min-height: 0;
+        margin-top: 14px;
+        padding: 28px 20px;
+        border-radius: 10px;
+    }
+
+    .resumo-pagamento {
+        margin-top: 22px;
+    }
+
+    .resumo-pagamento h2,
+    .metodos-pagamento legend {
+        font-size: 15px;
+    }
+
+    .opcoes-pagamento {
+        gap: 12px;
+    }
+
+    .opcao-pagamento {
+        gap: 12px;
+        min-height: 64px;
+        font-size: 18px;
+    }
+
+    .opcao-pagamento img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .botao-finalizar {
+        margin-top: 36px;
+    }
+}

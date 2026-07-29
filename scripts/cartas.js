@@ -1,6 +1,7 @@
 "use strict";
 
 const LIMITE_DECK = 8;
+const CHAVE_PACOTES_PENDENTES = "pacotes-pendentes";
 const cartas = [
     { id: "gumball", nome: "Gumball", hp: 90, dano: 20, imagem: "" },
     { id: "darwin", nome: "Darwin", hp: 76, dano: 18, imagem: "" },
@@ -23,6 +24,68 @@ const cartas = [
 ];
 
 const deck = [];
+let pacotesPendentes = 0;
+
+function obterPacotesPendentes() {
+    try {
+        const quantidade = Number.parseInt(localStorage.getItem(CHAVE_PACOTES_PENDENTES) ?? "0", 10);
+
+        return Number.isInteger(quantidade) && quantidade > 0 ? quantidade : 0;
+    } catch {
+        return 0;
+    }
+}
+
+function salvarPacotesPendentes() {
+    try {
+        localStorage.setItem(CHAVE_PACOTES_PENDENTES, String(pacotesPendentes));
+        return true;
+    } catch {
+        exibirMensagem("O pacote foi aberto, mas não foi possível salvar seu inventário.");
+        return false;
+    }
+}
+
+function renderizarBotaoPacotes() {
+    const botao = document.getElementById("botao-abrir-pacote");
+    const possuiPacotes = pacotesPendentes > 0;
+    const texto = pacotesPendentes === 1 ? "Abrir pacote" : `Abrir pacotes (${pacotesPendentes})`;
+
+    botao.hidden = !possuiPacotes;
+    botao.disabled = !possuiPacotes;
+    botao.querySelector("span").textContent = texto;
+    botao.setAttribute("aria-label", possuiPacotes
+        ? `${texto}. Você possui ${pacotesPendentes} ${pacotesPendentes === 1 ? "pacote disponível" : "pacotes disponíveis"}.`
+        : "Você não possui pacotes para abrir.");
+}
+
+function sortearCartasPacote() {
+    const cartasDisponiveis = [...cartas];
+    const cartasRecebidas = [];
+
+    while (cartasRecebidas.length < 3 && cartasDisponiveis.length) {
+        const indiceSorteado = Math.floor(Math.random() * cartasDisponiveis.length);
+
+        cartasRecebidas.push(cartasDisponiveis.splice(indiceSorteado, 1)[0]);
+    }
+
+    return cartasRecebidas;
+}
+
+function abrirPacote() {
+    if (!pacotesPendentes) {
+        return;
+    }
+
+    pacotesPendentes -= 1;
+    salvarPacotesPendentes();
+    renderizarBotaoPacotes();
+
+    const cartasRecebidas = sortearCartasPacote();
+    const nomesCartas = cartasRecebidas.map((carta) => carta.nome).join(", ");
+
+    exibirMensagem(`Pacote aberto. Você recebeu: ${nomesCartas}.`);
+}
 
 function obterCarta(idCarta) {
     return cartas.find((carta) => carta.id === idCarta);
@@ -185,17 +248,15 @@ function configurarInteracoes() {
         }
     });
 
-    document.querySelectorAll(".navegacao-cartas button").forEach((botao) => {
-        botao.addEventListener("click", () => {
-            exibirMensagem(`A seção ${botao.dataset.secao} estará disponível em breve.`);
-        });
-    });
+    document.getElementById("botao-abrir-pacote").addEventListener("click", abrirPacote);
 }
 
 function iniciarColecao() {
     try {
+        pacotesPendentes = obterPacotesPendentes();
         renderizarDeck();
         renderizarColecao();
+        renderizarBotaoPacotes();
         configurarInteracoes();
     } catch {
         document.getElementById("estado-colecao").textContent = "Não foi possível carregar as cartas. Atualize a página e tente novamente.";
