@@ -1,8 +1,10 @@
 "use strict";
 
+// Configurações fixas: limite de quantidade por produto e tempo até trocar as coleções
 const QUANTIDADE_MAXIMA = 10;
 const TEMPO_REESTOQUE = 30 * 60;
 
+// Coleções que se revezam na loja com o passar do tempo
 const colecoes = [
     {
         primeira: "Hora de Aventura",
@@ -21,6 +23,7 @@ const colecoes = [
     }
 ];
 
+// Lista de todos os produtos vendidos na loja
 const produtos = [
     {
         id: "hora-aventura",
@@ -84,10 +87,12 @@ const produtos = [
     }
 ];
 
+// Quantidade escolhida de cada produto, cronômetro de reestoque e coleção atual em exibição
 const quantidades = new Map(produtos.map((produto) => [produto.id, 1]));
 let segundosRestantes = TEMPO_REESTOQUE;
 let indiceColecao = 0;
 
+// Formata um número como moeda em reais (R$)
 function formatarReais(valor) {
     return valor.toLocaleString("pt-BR", {
         style: "currency",
@@ -95,6 +100,7 @@ function formatarReais(valor) {
     });
 }
 
+// Monta o texto da quantidade total (em moedas ou pacotes) de um produto
 function textoQuantidade(produto, quantidade) {
     const total = produto.quantidadePorUnidade * quantidade;
 
@@ -105,10 +111,12 @@ function textoQuantidade(produto, quantidade) {
     return `${total} ${total === 1 ? "pacote" : "pacotes"}`;
 }
 
+// Retorna o nome do produto, usando a coleção da vez quando aplicável
 function obterNomeProduto(produto) {
     return produto.colecao ? colecoes[indiceColecao][produto.colecao] : produto.nome;
 }
 
+// Cria a imagem ou ícone visual do produto (pacote ou recurso)
 function criarVisualProduto(produto) {
     const visual = document.createElement("div");
 
@@ -135,6 +143,7 @@ function criarVisualProduto(produto) {
     return visual;
 }
 
+// Cria o botão de aumentar ou diminuir a quantidade de um produto
 function criarBotaoQuantidade(produto, acao, rotulo) {
     const botao = document.createElement("button");
 
@@ -148,6 +157,7 @@ function criarBotaoQuantidade(produto, acao, rotulo) {
     return botao;
 }
 
+// Monta o card completo de um produto (visual, nome, preço, quantidade e botões de compra)
 function criarProduto(produto) {
     const item = document.createElement("li");
     const informacoes = document.createElement("div");
@@ -207,6 +217,7 @@ function criarProduto(produto) {
     return item;
 }
 
+// Atualiza preço, quantidade e estado dos botões de um produto já criado na tela
 function atualizarProduto(item, produto) {
     const quantidade = quantidades.get(produto.id);
     const precoMoedas = produto.precoMoedas * quantidade;
@@ -226,6 +237,7 @@ function atualizarProduto(item, produto) {
 
     campoPreco.replaceChildren();
 
+    // Produtos com preço em moedas mostram "moedas ou reais" no mesmo card.
     if (precoMoedas > 0) {
         const moeda = document.createElement("span");
         const icone = document.createElement("img");
@@ -245,6 +257,7 @@ function atualizarProduto(item, produto) {
         botaoMoedas.hidden = false;
         botaoMoedas.textContent = `Comprar ${quantidade > 1 ? `${quantidade}x ` : ""}com moeda`;
     } else {
+        // Recursos de moedas só aceitam pagamento em reais.
         campoPreco.textContent = formatarReais(precoReais);
         botaoMoedas.hidden = true;
     }
@@ -254,6 +267,7 @@ function atualizarProduto(item, produto) {
         : `Comprar ${quantidade > 1 ? `${quantidade}x ` : ""}em R$`;
 }
 
+// Desenha todas as seções e produtos da loja
 function renderizarLoja() {
     const grade = document.getElementById("grade-loja");
     const estado = document.getElementById("estado-loja");
@@ -266,6 +280,7 @@ function renderizarLoja() {
     const fragmento = document.createDocumentFragment();
 
     try {
+        // Gera as seções da loja dinamicamente para manter estrutura e produtos sincronizados.
         configuracoesSecao.forEach((configuracao) => {
             const produtosSecao = produtos.filter((produto) => produto.secao === configuracao.id);
             const secao = document.createElement("section");
@@ -296,10 +311,12 @@ function renderizarLoja() {
     }
 }
 
+// Mostra uma mensagem de status da loja
 function exibirMensagem(mensagem) {
     document.getElementById("mensagem-loja").textContent = mensagem;
 }
 
+// Aumenta ou diminui a quantidade escolhida de um produto, respeitando os limites
 function atualizarQuantidade(idProduto, variacao) {
     const produto = produtos.find((item) => item.id === idProduto);
     const quantidadeAtual = quantidades.get(idProduto);
@@ -314,6 +331,7 @@ function atualizarQuantidade(idProduto, variacao) {
     exibirMensagem(`${textoQuantidade(produto, novaQuantidade)} de ${obterNomeProduto(produto)} selecionado${novaQuantidade > 1 ? "s" : ""}.`);
 }
 
+// Confirma a compra: paga com moedas na hora ou envia o pedido para a tela de pagamento em reais
 function confirmarCompra(idProduto, metodo) {
     const produto = produtos.find((item) => item.id === idProduto);
     const quantidade = quantidades.get(idProduto);
@@ -323,6 +341,7 @@ function confirmarCompra(idProduto, metodo) {
     }
 
     if (metodo === "reais") {
+        // Pagamento em reais cria um pedido temporário para ser finalizado na página de checkout.
         const pedido = {
             descricao: `${textoQuantidade(produto, quantidade)} de ${obterNomeProduto(produto)}`,
             total: produto.precoReais * quantidade,
@@ -342,6 +361,7 @@ function confirmarCompra(idProduto, metodo) {
     exibirMensagem(`Compra local de ${textoQuantidade(produto, quantidade)} de ${obterNomeProduto(produto)} por ${produto.precoMoedas * quantidade} moedas confirmada.`);
 }
 
+// Formata os segundos restantes do reestoque no formato mm:ss
 function formatarTempoReestoque() {
     const minutos = Math.floor(segundosRestantes / 60);
     const segundos = segundosRestantes % 60;
@@ -349,17 +369,20 @@ function formatarTempoReestoque() {
     return `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
 }
 
+// Atualiza o texto do cronômetro de reestoque na tela
 function atualizarCronometro() {
     const cronometro = document.getElementById("cronometro-reestoque");
 
     cronometro.textContent = formatarTempoReestoque();
 }
 
+// Cria o cronômetro que troca as coleções da loja quando o tempo de reestoque termina
 function configurarCronometro() {
     atualizarCronometro();
 
     window.setInterval(() => {
         if (segundosRestantes <= 1) {
+            // Ao virar o ciclo, troca a coleção ativa e renderiza novamente os nomes dependentes dela.
             indiceColecao = (indiceColecao + 1) % colecoes.length;
             segundosRestantes = TEMPO_REESTOQUE;
             renderizarLoja();
@@ -372,8 +395,10 @@ function configurarCronometro() {
     }, 1000);
 }
 
+// Liga os cliques dos botões de quantidade e de compra dos produtos
 function configurarInteracoes() {
     document.getElementById("grade-loja").addEventListener("click", (evento) => {
+        // Delegação de evento para funcionar mesmo após re-render completo da grade.
         const botaoQuantidade = evento.target.closest(".botao-quantidade");
         const botaoCompra = evento.target.closest(".botao-compra");
 
@@ -389,6 +414,7 @@ function configurarInteracoes() {
 
 }
 
+// Inicia a loja quando a página carrega
 document.addEventListener("DOMContentLoaded", () => {
     renderizarLoja();
     configurarInteracoes();

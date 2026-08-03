@@ -1,7 +1,9 @@
 "use strict";
 
+// Configurações fixas: tamanho máximo do deck e chave usada no localStorage
 const LIMITE_DECK = 8;
 const CHAVE_PACOTES_PENDENTES = "pacotes-pendentes";
+// Lista de todas as cartas disponíveis na coleção
 const cartas = [
     { id: "gumball", nome: "Gumball", hp: 90, dano: 20, imagem: "" },
     { id: "darwin", nome: "Darwin", hp: 76, dano: 18, imagem: "" },
@@ -23,9 +25,11 @@ const cartas = [
     { id: "mandark", nome: "Mandark", hp: 70, dano: 18, imagem: "" }
 ];
 
+// Deck atual do jogador (ids das cartas) e quantidade de pacotes ainda não abertos
 const deck = [];
 let pacotesPendentes = 0;
 
+// Lê do localStorage quantos pacotes o jogador ainda tem para abrir
 function obterPacotesPendentes() {
     try {
         const quantidade = Number.parseInt(localStorage.getItem(CHAVE_PACOTES_PENDENTES) ?? "0", 10);
@@ -36,6 +40,7 @@ function obterPacotesPendentes() {
     }
 }
 
+// Salva no localStorage a quantidade atual de pacotes pendentes
 function salvarPacotesPendentes() {
     try {
         localStorage.setItem(CHAVE_PACOTES_PENDENTES, String(pacotesPendentes));
@@ -46,6 +51,7 @@ function salvarPacotesPendentes() {
     }
 }
 
+// Mostra, esconde e atualiza o texto do botão de abrir pacotes
 function renderizarBotaoPacotes() {
     const botao = document.getElementById("botao-abrir-pacote");
     const possuiPacotes = pacotesPendentes > 0;
@@ -59,6 +65,7 @@ function renderizarBotaoPacotes() {
         : "Você não possui pacotes para abrir.");
 }
 
+// Sorteia 3 cartas aleatórias e diferentes para um pacote
 function sortearCartasPacote() {
     const cartasDisponiveis = [...cartas];
     const cartasRecebidas = [];
@@ -66,12 +73,14 @@ function sortearCartasPacote() {
     while (cartasRecebidas.length < 3 && cartasDisponiveis.length) {
         const indiceSorteado = Math.floor(Math.random() * cartasDisponiveis.length);
 
+        // Remove a carta sorteada do pool para evitar repetição no mesmo pacote.
         cartasRecebidas.push(cartasDisponiveis.splice(indiceSorteado, 1)[0]);
     }
 
     return cartasRecebidas;
 }
 
+// Abre um pacote pendente, sorteia as cartas recebidas e mostra o resultado
 function abrirPacote() {
     if (!pacotesPendentes) {
         return;
@@ -87,10 +96,12 @@ function abrirPacote() {
     exibirMensagem(`Pacote aberto. Você recebeu: ${nomesCartas}.`);
 }
 
+// Busca uma carta da coleção pelo seu id
 function obterCarta(idCarta) {
     return cartas.find((carta) => carta.id === idCarta);
 }
 
+// Cria a área de imagem da carta (ou um aviso de indisponível, se não houver imagem)
 function criarImagemCarta(carta) {
     const imagem = document.createElement("div");
 
@@ -110,6 +121,7 @@ function criarImagemCarta(carta) {
     return imagem;
 }
 
+// Cria o bloco de texto com nome, HP e dano da carta
 function criarDadosCarta(carta) {
     const dados = document.createElement("span");
     const nome = document.createElement("strong");
@@ -125,12 +137,14 @@ function criarDadosCarta(carta) {
     return dados;
 }
 
+// Desenha os 8 espaços do deck, vazios ou preenchidos com a carta escolhida
 function renderizarDeck() {
     const gradeDeck = document.getElementById("grade-deck");
     const estadoDeck = document.getElementById("estado-deck");
     const fragmento = document.createDocumentFragment();
 
     for (let indice = 0; indice < LIMITE_DECK; indice += 1) {
+        // O deck sempre renderiza 8 slots, preenchidos ou vazios.
         const espaco = document.createElement("li");
         const idCarta = deck[indice];
 
@@ -161,6 +175,7 @@ function renderizarDeck() {
         : "Seu deck está vazio. Selecione cartas na coleção para adicioná-las.";
 }
 
+// Desenha todas as cartas da coleção, desabilitando as que já estão no deck
 function renderizarColecao() {
     const gradeColecao = document.getElementById("grade-colecao");
     const estadoColecao = document.getElementById("estado-colecao");
@@ -180,6 +195,7 @@ function renderizarColecao() {
         botao.type = "button";
         botao.className = "carta-colecao";
         botao.dataset.idCarta = carta.id;
+        // Bloqueia adição quando a carta já está no deck ou o limite foi atingido.
         botao.disabled = cartaNoDeck || deck.length >= LIMITE_DECK;
         botao.setAttribute("aria-label", cartaNoDeck
             ? `${carta.nome} já está no seu deck. HP ${carta.hp}, dano ${carta.dano}.`
@@ -193,10 +209,12 @@ function renderizarColecao() {
     estadoColecao.textContent = `${cartas.length} cartas disponíveis na coleção.`;
 }
 
+// Mostra uma mensagem de status da tela de coleção
 function exibirMensagem(mensagem) {
     document.getElementById("mensagem-colecao").textContent = mensagem;
 }
 
+// Adiciona uma carta ao deck, se ela ainda não estiver nele e houver espaço
 function adicionarCarta(idCarta) {
     const carta = obterCarta(idCarta);
 
@@ -212,10 +230,12 @@ function adicionarCarta(idCarta) {
     deck.push(idCarta);
     renderizarDeck();
     renderizarColecao();
+    // Devolve o foco para a carta no deck para feedback imediato de teclado.
     document.querySelector(`#grade-deck .carta-deck[data-id-carta="${idCarta}"]`)?.focus();
     exibirMensagem(`${carta.nome} foi adicionado ao seu deck.`);
 }
 
+// Remove uma carta do deck do jogador
 function removerCarta(idCarta) {
     const indiceCarta = deck.indexOf(idCarta);
     const carta = obterCarta(idCarta);
@@ -227,10 +247,12 @@ function removerCarta(idCarta) {
     deck.splice(indiceCarta, 1);
     renderizarDeck();
     renderizarColecao();
+    // Após remover, volta o foco para a carta na coleção para facilitar nova escolha.
     document.querySelector(`#grade-colecao .carta-colecao[data-id-carta="${idCarta}"]`)?.focus();
     exibirMensagem(`${carta.nome} foi removido do seu deck.`);
 }
 
+// Liga os cliques da coleção, do deck e do botão de abrir pacote às suas ações
 function configurarInteracoes() {
     document.getElementById("grade-colecao").addEventListener("click", (evento) => {
         const botao = evento.target.closest(".carta-colecao");
@@ -251,8 +273,10 @@ function configurarInteracoes() {
     document.getElementById("botao-abrir-pacote").addEventListener("click", abrirPacote);
 }
 
+// Carrega o estado inicial da tela de cartas (deck, coleção e pacotes)
 function iniciarColecao() {
     try {
+        // Carrega primeiro os pacotes pendentes para exibir o botão corretamente.
         pacotesPendentes = obterPacotesPendentes();
         renderizarDeck();
         renderizarColecao();
@@ -263,4 +287,5 @@ function iniciarColecao() {
     }
 }
 
+// Inicia a tela de cartas quando a página carrega
 document.addEventListener("DOMContentLoaded", iniciarColecao);

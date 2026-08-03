@@ -1,5 +1,6 @@
 "use strict";
 
+// Lista de jogadores e pontos do ranking regional
 const rankingRegional = [
     { nome: "LunaCartoon", pontos: 2480 },
     { nome: "PandaMestre", pontos: 2415 },
@@ -13,6 +14,7 @@ const rankingRegional = [
     { nome: "Mandy_01", pontos: 1970 }
 ];
 
+// Lista de jogadores e pontos do ranking global
 const rankingGlobal = [
     { nome: "NovaHero", pontos: 3280 },
     { nome: "CardMaster", pontos: 3195 },
@@ -26,6 +28,7 @@ const rankingGlobal = [
     { nome: "AdventureTime", pontos: 2400 }
 ];
 
+// Cria o item de uma posição do ranking (número, nome e pontos)
 function criarPosicao(jogador, posicao) {
     const item = document.createElement("li");
     const numero = document.createElement("span");
@@ -45,6 +48,7 @@ function criarPosicao(jogador, posicao) {
     return item;
 }
 
+// Desenha a lista de jogadores de um ranking na tela
 function renderizarRanking(idLista, jogadores) {
     const lista = document.getElementById(idLista);
 
@@ -63,10 +67,12 @@ function renderizarRanking(idLista, jogadores) {
     return true;
 }
 
+// Carrega e desenha os rankings regional e global quando a página abre
 function iniciarRanking() {
     const estado = document.getElementById("estado-ranking");
 
     try {
+        // Renderiza as duas listas e decide a mensagem de estado com base no que foi carregado.
         const possuiRegional = renderizarRanking("ranking-regional", rankingRegional);
         const possuiGlobal = renderizarRanking("ranking-global", rankingGlobal);
 
@@ -79,4 +85,5 @@ function iniciarRanking() {
     }
 }
 
+// Inicia o ranking quando a página carrega
 document.addEventListener("DOMContentLoaded", iniciarRanking);

@@ -1,13 +1,16 @@
 "use strict";
 
+// Pedido usado quando não há nenhuma compra pendente salva pela loja
 const PEDIDO_PADRAO = {
     descricao: "1 pacote",
     total: 5.99,
     pacotes: 0
 };
 
+// Guarda o método de pagamento escolhido (pix ou cartão)
 let metodoSelecionado = "";
 
+// Formata um número como moeda em reais (R$)
 function formatarReais(valor) {
     return valor.toLocaleString("pt-BR", {
         style: "currency",
@@ -15,6 +18,7 @@ function formatarReais(valor) {
     });
 }
 
+// Lê e valida o pedido pendente salvo pela loja, usando o padrão se não houver ou for inválido
 function obterPedidoPendente() {
     try {
         const pedidoArmazenado = sessionStorage.getItem("pedido-pendente");
@@ -25,6 +29,7 @@ function obterPedidoPendente() {
 
         const pedido = JSON.parse(pedidoArmazenado);
 
+        // Validação defensiva para evitar quebrar a página com dados antigos/corrompidos.
         if (typeof pedido.descricao !== "string" || !Number.isFinite(pedido.total) || pedido.total <= 0) {
             return PEDIDO_PADRAO;
         }
@@ -39,6 +44,7 @@ function obterPedidoPendente() {
     }
 }
 
+// Habilita ou desabilita os campos do formulário de cartão
 function atualizarFormularioCartao(ativo) {
     const camposCartao = document.getElementById("campos-cartao");
 
@@ -49,6 +55,7 @@ function atualizarFormularioCartao(ativo) {
     });
 }
 
+// Marca o método de pagamento escolhido e ajusta a tela de acordo
 function selecionarMetodo(metodo) {
     metodoSelecionado = metodo;
 
@@ -56,12 +63,15 @@ function selecionarMetodo(metodo) {
     document.getElementById("metodo-cartao").setAttribute("aria-pressed", String(metodo === "cartao"));
     document.getElementById("instrucoes-pix").hidden = metodo !== "pix";
     document.getElementById("botao-finalizar").disabled = false;
+    // Sempre limpa mensagens antigas ao trocar o método para evitar confusão.
     document.getElementById("mensagem-pagamento").textContent = "";
     document.getElementById("erro-cartao").textContent = "";
     atualizarFormularioCartao(metodo === "cartao");
 }
 
+// Valida número, validade e código de segurança do cartão
 function validarCartao() {
+    // Remove qualquer caractere não numérico antes das validações de tamanho.
     const numero = document.getElementById("numero-cartao").value.replace(/\D/g, "");
     const validade = document.getElementById("validade-cartao").value;
     const codigo = document.getElementById("codigo-cartao").value.replace(/\D/g, "");
@@ -89,6 +99,7 @@ function validarCartao() {
     return true;
 }
 
+// Soma os pacotes comprados ao estoque de pacotes pendentes salvo no localStorage
 function adicionarPacotesAoInventario(pedido) {
     if (!pedido.pacotes) {
         return 0;
@@ -105,12 +116,14 @@ function adicionarPacotesAoInventario(pedido) {
     }
 }
 
+// Confirma o pedido, credita os pacotes comprados e mostra a mensagem de confirmação
 function concluirPedido(pedido) {
     const formulario = document.getElementById("formulario-pagamento");
     const confirmacao = document.getElementById("confirmacao-pagamento");
     const texto = document.getElementById("texto-confirmacao");
     const descricaoMetodo = metodoSelecionado === "pix" ? "PIX" : "cartão";
     const pacotesRecebidos = adicionarPacotesAoInventario(pedido);
+    // Só acrescenta o trecho sobre pacotes quando a compra realmente concede pacotes.
     const mensagemPacotes = pacotesRecebidos
         ? ` ${pacotesRecebidos === 1 ? "Um pacote foi adicionado" : `${pacotesRecebidos} pacotes foram adicionados`} à sua coleção.`
         : "";
@@ -127,6 +140,7 @@ function concluirPedido(pedido) {
     }
 }
 
+// Liga os botões de método de pagamento e o envio do formulário
 function configurarFormulario(pedido) {
     document.getElementById("metodo-pix").addEventListener("click", () => selecionarMetodo("pix"));
     document.getElementById("metodo-cartao").addEventListener("click", () => selecionarMetodo("cartao"));
@@ -134,6 +148,7 @@ function configurarFormulario(pedido) {
     document.getElementById("formulario-pagamento").addEventListener("submit", (evento) => {
         evento.preventDefault();
 
+        // Sem método selecionado, o pedido não pode ser finalizado.
         if (!metodoSelecionado) {
             document.getElementById("mensagem-pagamento").textContent = "Escolha um método de pagamento para continuar.";
             return;
@@ -147,6 +162,7 @@ function configurarFormulario(pedido) {
     });
 }
 
+// Carrega o pedido pendente e prepara a tela de pagamento
 function iniciarPagamento() {
     const pedido = obterPedidoPendente();
 
@@ -156,4 +172,5 @@ function iniciarPagamento() {
     configurarFormulario(pedido);
 }
 
+// Inicia a tela de pagamento quando a página carrega
 document.addEventListener("DOMContentLoaded", iniciarPagamento);

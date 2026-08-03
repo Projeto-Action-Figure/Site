@@ -1,10 +1,12 @@
 "use strict";
 
+// Configurações fixas da batalha: energia máxima, tempo de turno, atraso ao sair e tamanho do campo
 const ENERGIA_MAXIMA = 3;
 const TEMPO_INICIAL = 25;
 const ATRASO_SAIDA_BATALHA = 1200;
 const TAMANHO_CAMPO = 3;
 
+// Guarda todo o estado atual da partida: vida, cartas, turno e seleção
 const estado = {
     jogador: {
         vida: 4,
@@ -34,12 +36,15 @@ const estado = {
     partidaEncerrada: false
 };
 
+// Guarda o ID do intervalo do cronômetro, usado para poder pará-lo depois
 let intervaloCronometro;
 
+// Retorna a carta ativa em campo de um lado (jogador ou adversário)
 function obterCartaEmCampo(lado, indiceCarta) {
     return lado.cartas[indiceCarta];
 }
 
+// Cria o espaço reservado (placeholder) para a imagem da carta
 function criarAreaImagemCarta() {
     const imagem = document.createElement("span");
 
@@ -49,6 +54,7 @@ function criarAreaImagemCarta() {
     return imagem;
 }
 
+// Cria o bloco de texto com nome, vida (HP) e dano da carta
 function criarDadosCarta(carta) {
     const dados = document.createElement("span");
     const nome = document.createElement("strong");
@@ -64,6 +70,7 @@ function criarDadosCarta(carta) {
     return dados;
 }
 
+// Monta o elemento de uma carta em campo, com botão de seleção quando é do jogador ou alvo do adversário
 function criarCartaCampo(carta, posicao, indiceCarta, tipoCampo) {
     const item = document.createElement("li");
     const ehCartaJogador = tipoCampo === "jogador";
@@ -73,6 +80,7 @@ function criarCartaCampo(carta, posicao, indiceCarta, tipoCampo) {
 
     if (ehCartaJogador || ehCartaRival) {
         const botao = document.createElement("button");
+        // Usa índices diferentes para manter seleção do atacante e do alvo separadas.
         const estaSelecionada = ehCartaJogador
             ? estado.indiceCartaCampo === indiceCarta
             : estado.indiceAlvoRival === indiceCarta;
@@ -98,6 +106,7 @@ function criarCartaCampo(carta, posicao, indiceCarta, tipoCampo) {
     return item;
 }
 
+// Desenha as cartas em campo de um lado (jogador ou adversário) na tela
 function renderizarCampo(idLista, lado, tipoCampo) {
     const lista = document.getElementById(idLista);
     const fragmento = document.createDocumentFragment();
@@ -110,6 +119,7 @@ function renderizarCampo(idLista, lado, tipoCampo) {
     lista.replaceChildren(fragmento);
 }
 
+// Desenha as cartas que estão na mão do jogador (fora do campo)
 function renderizarMao() {
     const mao = document.getElementById("mao-jogador");
     const fragmento = document.createDocumentFragment();
@@ -133,16 +143,19 @@ function renderizarMao() {
     mao.replaceChildren(fragmento);
 }
 
+// Atualiza o texto do cronômetro do turno na tela
 function atualizarCronometro() {
     document.getElementById("cronometro").textContent = `00:${String(estado.segundosRestantes).padStart(2, "0")}`;
 }
 
+// Atualiza toda a interface da batalha (vida, energia, turno, botões e cartas) e move o foco se indicado
 function atualizarInterface(seletorFoco = "") {
     const cartaSelecionadaCampo = obterCartaEmCampo(estado.jogador, estado.indiceCartaCampo);
     const cartaAlvoRival = obterCartaEmCampo(estado.adversario, estado.indiceAlvoRival);
     const indicadorTurno = document.getElementById("indicador-turno");
     const textoTurno = indicadorTurno.querySelector("strong");
     const podeAtacar = estado.turnoDoJogador && !estado.partidaEncerrada && estado.jogador.energia >= 1;
+    // Trocar só é permitido quando já existe uma carta da mão selecionada.
     const podeTrocar = podeAtacar && estado.cartaSelecionada !== null;
 
     document.getElementById("vida-jogador").textContent = String(Math.max(0, estado.jogador.vida));
@@ -163,6 +176,7 @@ function atualizarInterface(seletorFoco = "") {
     document.getElementById("botao-desistir").disabled = estado.partidaEncerrada;
     document.getElementById("botao-atacar").setAttribute("aria-label", `Atacar ${cartaAlvoRival.nome} com ${cartaSelecionadaCampo.nome}. Custa 1 energia.`);
 
+    // Sempre redesenha campo e mão com base no estado atual para manter os botões sincronizados.
     renderizarCampo("cartas-jogador", estado.jogador, "jogador");
     renderizarCampo("cartas-adversario", estado.adversario, "adversario");
     renderizarMao();
@@ -172,6 +186,7 @@ function atualizarInterface(seletorFoco = "") {
     }
 }
 
+// Mostra uma mensagem de status da batalha, destacando se veio do jogador ou do adversário
 function exibirMensagem(mensagem, origem = "jogador") {
     const elementoMensagem = document.getElementById("mensagem-batalha");
 
@@ -180,6 +195,7 @@ function exibirMensagem(mensagem, origem = "jogador") {
     elementoMensagem.classList.toggle("adversario", origem === "adversario");
 }
 
+// Decide para qual botão mover o foco depois de uma ação do jogador
 function obterSeletorFocoAposAcao() {
     if (estado.partidaEncerrada) {
         return "#botao-desistir";
@@ -188,7 +204,9 @@ function obterSeletorFocoAposAcao() {
     return estado.jogador.energia >= 1 ? "#botao-atacar" : "#botao-passar";
 }
 
+// Remove a carta derrotada de um lado, tira 1 de vida e verifica se a partida terminou
 function trocarCartaDerrotada(lado, descricaoLado) {
+    // Só considera derrotas entre cartas que estão em campo (primeiras 3 posições).
     const indiceCartaDerrotada = lado.cartas.findIndex((carta, indice) => indice < TAMANHO_CAMPO && carta.vida <= 0);
 
     if (indiceCartaDerrotada === -1) {
@@ -216,6 +234,7 @@ function trocarCartaDerrotada(lado, descricaoLado) {
     lado.cartas.splice(indiceCartaDerrotada, 1);
 
     if (lado === estado.jogador) {
+        // Ajusta os índices do jogador para não apontarem para posição removida.
         if (estado.indiceCartaCampo > indiceCartaDerrotada) {
             estado.indiceCartaCampo -= 1;
         }
@@ -228,6 +247,7 @@ function trocarCartaDerrotada(lado, descricaoLado) {
             estado.cartaSelecionada -= 1;
         }
     } else {
+        // Faz o mesmo ajuste para o lado adversário (atacante e alvo).
         if (estado.indiceCartaRival > indiceCartaDerrotada) {
             estado.indiceCartaRival -= 1;
         }
@@ -251,10 +271,12 @@ function trocarCartaDerrotada(lado, descricaoLado) {
     return true;
 }
 
+// Verifica cartas derrotadas dos dois lados e retorna true se a partida já terminou
 function verificarResultado() {
     return !trocarCartaDerrotada(estado.adversario, "adversário") || !trocarCartaDerrotada(estado.jogador, "jogador");
 }
 
+// Executa o ataque da carta selecionada do jogador contra o alvo do adversário
 function atacar() {
     if (estado.partidaEncerrada || !estado.turnoDoJogador || estado.jogador.energia < 1) {
         return;
@@ -270,6 +292,7 @@ function atacar() {
     atualizarInterface(obterSeletorFocoAposAcao());
 }
 
+// Troca a carta em campo do jogador pela carta escolhida na mão
 function trocarCarta() {
     if (estado.partidaEncerrada || !estado.turnoDoJogador || estado.jogador.energia < 1 || estado.cartaSelecionada === null) {
         return;
@@ -286,11 +309,13 @@ function trocarCarta() {
     atualizarInterface(obterSeletorFocoAposAcao());
 }
 
+// Inicia o turno do adversário e, após um tempo, simula o ataque dele
 function iniciarTurnoAdversario(seletorFoco = "") {
     estado.turnoDoJogador = false;
     atualizarInterface(seletorFoco);
     exibirMensagem("Rival_03 está escolhendo uma ação.", "adversario");
 
+    // Delay curto para simular a "decisão" do rival e dar tempo de leitura ao usuário.
     window.setTimeout(() => {
         if (estado.partidaEncerrada) {
             return;
@@ -317,20 +342,24 @@ function iniciarTurnoAdversario(seletorFoco = "") {
     }, 800);
 }
 
+// Passa o turno do jogador para o adversário
 function passarTurno() {
     if (!estado.partidaEncerrada && estado.turnoDoJogador) {
         iniciarTurnoAdversario("#botao-desistir");
     }
 }
 
+// Encerra a partida, para o cronômetro e mostra a mensagem final
 function encerrarPartida(mensagem, origem = "jogador") {
     estado.partidaEncerrada = true;
     window.clearInterval(intervaloCronometro);
     exibirMensagem(mensagem, origem);
 }
 
+// Cria o cronômetro que conta os segundos do turno e passa o turno quando o tempo acaba
 function configurarCronometro() {
     intervaloCronometro = window.setInterval(() => {
+        // O relógio só desce durante o turno ativo do jogador.
         if (estado.partidaEncerrada || !estado.turnoDoJogador) {
             return;
         }
@@ -349,6 +378,7 @@ function configurarCronometro() {
     }, 1000);
 }
 
+// Liga os cliques dos botões e das cartas às ações da batalha
 function configurarEventos() {
     document.getElementById("botao-atacar").addEventListener("click", atacar);
     document.getElementById("botao-trocar").addEventListener("click", trocarCarta);
@@ -364,6 +394,7 @@ function configurarEventos() {
     });
 
     document.getElementById("mao-jogador").addEventListener("click", (evento) => {
+        // Delegação de evento: captura cliques em qualquer carta da mão, inclusive as recriadas no render.
         const botaoCarta = evento.target.closest(".carta-mao");
 
         if (!botaoCarta || botaoCarta.disabled) {
@@ -376,6 +407,7 @@ function configurarEventos() {
     });
 
     document.getElementById("cartas-jogador").addEventListener("click", (evento) => {
+        // Delegação para selecionar rapidamente qual carta ativa vai atacar.
         const botaoCarta = evento.target.closest(".botao-carta-campo");
 
         if (!botaoCarta || botaoCarta.disabled) {
@@ -388,6 +420,7 @@ function configurarEventos() {
     });
 
     document.getElementById("cartas-adversario").addEventListener("click", (evento) => {
+        // Delegação para escolher o alvo do próximo ataque.
         const botaoCarta = evento.target.closest(".botao-carta-campo");
 
         if (!botaoCarta || botaoCarta.disabled) {
@@ -400,6 +433,7 @@ function configurarEventos() {
     });
 }
 
+// Inicializa a tela de batalha quando a página carrega
 document.addEventListener("DOMContentLoaded", () => {
     atualizarInterface();
     configurarEventos();

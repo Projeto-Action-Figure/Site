@@ -1,5 +1,6 @@
 "use strict";
 
+// Verifica um campo do formulário de perfil e retorna a mensagem de erro correspondente
 function obterMensagemErro(campo) {
     if (campo.validity.valueMissing) {
         return "Preencha este campo.";
@@ -12,11 +13,13 @@ function obterMensagemErro(campo) {
     return "";
 }
 
+// Mostra a mensagem de erro do campo e atualiza o aria-invalid
 function exibirErro(campo, mensagem) {
     document.getElementById(`erro-${campo.id}`).textContent = mensagem;
     campo.setAttribute("aria-invalid", String(Boolean(mensagem)));
 }
 
+// Valida os campos e trata o envio do formulário de perfil
 function configurarFormularioPerfil() {
     const formulario = document.querySelector(".formulario-perfil");
     const mensagemPerfil = document.getElementById("mensagem-perfil");
@@ -28,6 +31,7 @@ function configurarFormularioPerfil() {
         let primeiroCampoInvalido = null;
 
         campos.forEach((campo) => {
+            // Mostra todos os erros dos campos e guarda o primeiro para foco.
             const mensagem = obterMensagemErro(campo);
 
             exibirErro(campo, mensagem);
@@ -53,4 +57,5 @@ function configurarFormularioPerfil() {
     });
 }
 
+// Inicia a validação do perfil quando a página carrega
 document.addEventListener("DOMContentLoaded", configurarFormularioPerfil);
